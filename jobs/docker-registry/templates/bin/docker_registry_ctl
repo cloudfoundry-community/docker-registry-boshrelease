@@ -6,7 +6,6 @@ set -u # report the usage of uninitialized variables
 # Setup env vars and folders for the webapp_ctl script
 source /var/vcap/jobs/docker_registry/helpers/ctl_setup.sh 'docker_registry'
 
-export PORT=${PORT:-80}
 export LANG=en_US.UTF-8
 
 case $1 in
@@ -14,12 +13,17 @@ case $1 in
   start)
     pid_guard $PIDFILE $JOB_NAME
 
-    # TODO: Run some process
-    # exec TODO \
-    #      >>$LOG_DIR/$JOB_NAME.stdout.log \
-    #      2>>$LOG_DIR/$JOB_NAME.stderr.log
+    export PATH=/var/vcap/packages/docker_registry/vendor/bin:$PATH
 
-    while true; do echo "edit jobs/docker-registry/templates/bin/docker_registry_ctl" | nc -l -p $PORT -q 1; done
+    export SETTINGS_FLAVOR=
+    export DOCKER_REGISTRY_CONFIG=$JOB_DIR/config/docker_registry.yml
+    export PORT_WWW=$PORT
+
+    cd /var/vcap/packages/docker_registry
+    exec chpst -u vcap:vcap \
+        gunicorn -w 1 wsgi:application \
+            >>$LOG_DIR/$JOB_NAME.stdout.log \
+            2>>$LOG_DIR/$JOB_NAME.stderr.log
 
     # store pid in $PIDFILE
     echo $! > $PIDFILE

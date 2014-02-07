@@ -7,9 +7,58 @@ templates:
   bin/monit_debugger: bin/monit_debugger
   bin/docker_registry_ctl: bin/docker_registry_ctl
   config/docker_registry.conf.erb: config/docker_registry.conf
+  config/gunicorn_config.py: config/gunicorn_config.py
   data/properties.sh.erb: data/properties.sh
   helpers/ctl_setup.sh: helpers/ctl_setup.sh
   helpers/ctl_utils.sh: helpers/ctl_utils.sh
 properties:
-  docker_registry.leader_address:
-    description: Hostname/IP to the leader/master of the cluster
+  docker_registry.loglevel:
+    description: Log level for Python/Gunicorn
+    default: info
+  docker_registry.port:
+    description: Port for access to Docker Registry
+    default: 80
+  docker_registry.boto_bucket:
+    description: FIXME
+    default: docker_registry
+  docker_registry.secret_key:
+    description: Secret key
+    default: docker_registry
+
+  docker_registry.storage:
+    description: Backend blobstore for registry images; available: local, s3, swift, openstack-swift, google
+    default: local
+
+  docker_registry.s3_access_key:
+    description: S3 access key
+  docker_registry.s3_secret_key:
+    description: S3 secret access key
+  docker_registry.s3_bucket:
+    description: S3 bucket name
+  docker_registry.s3_encrypt:
+    description: S3 encrypt
+    default: docker_registry
+  docker_registry.s3_secure:
+    description: S3 secure access
+    default: true
+
+  docker_registry.swift_authurl:
+    description: Swift Auth URL
+  docker_registry.swift_container:
+    description: Swift container name
+  docker_registry.swift_user:
+    description: Swift username
+  docker_registry.swift_password:
+    description: Swift password/API key
+  docker_registry.swift_tenant_name:
+    description: Swift tenant/project name
+  docker_registry.swift_region_name:
+    description: Swift region name (optional)
+
+  gs_access_key:
+    description: Google Compute access key
+  gs_secret_key:
+    description: Google Compute secret key
+  gs_secure:
+    description: Google Compute secure access
+    default: true

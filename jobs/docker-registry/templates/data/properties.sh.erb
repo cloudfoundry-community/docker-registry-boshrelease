@@ -8,3 +8,6 @@ export NAME='<%= name %>'
 export JOB_INDEX=<%= index %>
 # full job name, like redis/0 or webapp/3
 export JOB_FULL="$NAME/$JOB_INDEX"
+
+export PORT=<%= p("docker_registry.port") %>
+export LOGLEVEL=<%= p("docker_registry.loglevel") %>
