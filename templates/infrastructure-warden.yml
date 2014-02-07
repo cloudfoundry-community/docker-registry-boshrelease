@@ -19,7 +19,7 @@ jobs:
       - name: (( meta.network_name ))
         static_ips: (( static_ips(0) ))
   - name: docker_registry_z1
-    instances: 2
+    instances: 0
     networks:
       - name: (( meta.network_name ))
         static_ips: ~
