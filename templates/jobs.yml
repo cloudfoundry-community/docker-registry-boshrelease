@@ -10,12 +10,12 @@ update:
 
 jobs:
   - name: docker_registry_leader_z1
-    template: docker-registry
+    template: docker_registry
     instances: 0
     resource_pool: small_z1
     networks: (( merge ))
   - name: docker_registry_z1
-    template: docker-registry
+    template: docker_registry
     instances: 0
     resource_pool: small_z1
     networks: (( merge ))

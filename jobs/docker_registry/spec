@@ -1,5 +1,5 @@
 ---
-name: docker-registry
+name: docker_registry
 packages:
 - python
 - docker_registry
@@ -26,7 +26,7 @@ properties:
     default: docker_registry
 
   docker_registry.storage:
-    description: Backend blobstore for registry images; available: local, s3, swift, openstack-swift, google
+    description: "Backend blobstore for registry images; available: local, s3, swift, openstack-swift, google"
     default: local
 
   docker_registry.s3_access_key:
