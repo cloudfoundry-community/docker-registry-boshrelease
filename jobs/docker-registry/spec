@@ -1,0 +1,13 @@
+---
+name: docker-registry
+packages: []
+templates:
+  bin/monit_debugger: bin/monit_debugger
+  bin/docker_registry_ctl: bin/docker_registry_ctl
+  config/docker_registry.conf.erb: config/docker_registry.conf
+  data/properties.sh.erb: data/properties.sh
+  helpers/ctl_setup.sh: helpers/ctl_setup.sh
+  helpers/ctl_utils.sh: helpers/ctl_utils.sh
+properties:
+  docker_registry.leader_address:
+    description: Hostname/IP to the leader/master of the cluster
