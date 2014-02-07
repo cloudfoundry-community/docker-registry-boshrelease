@@ -1,0 +1,8 @@
+PIP_USE_MIRRORS=true
+
+cd docker-registry
+mkdir vendor
+sudo pip install --install-option="--home=$(pwd)/vendor" -r requirements.txt
+
+# Add this into jobs
+export PYTHONPATH=$(pwd)/vendor/lib/python

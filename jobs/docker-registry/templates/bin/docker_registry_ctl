@@ -6,7 +6,7 @@ set -u # report the usage of uninitialized variables
 # Setup env vars and folders for the webapp_ctl script
 source /var/vcap/jobs/docker_registry/helpers/ctl_setup.sh 'docker_registry'
 
-export PORT=${PORT:-5000}
+export PORT=${PORT:-80}
 export LANG=en_US.UTF-8
 
 case $1 in
@@ -15,9 +15,11 @@ case $1 in
     pid_guard $PIDFILE $JOB_NAME
 
     # TODO: Run some process
-    exec TODO \
-         >>$LOG_DIR/$JOB_NAME.stdout.log \
-         2>>$LOG_DIR/$JOB_NAME.stderr.log
+    # exec TODO \
+    #      >>$LOG_DIR/$JOB_NAME.stdout.log \
+    #      2>>$LOG_DIR/$JOB_NAME.stderr.log
+
+    while true; do echo "edit jobs/docker-registry/templates/bin/docker_registry_ctl" | nc -l -p $PORT -q 1; done
 
     # store pid in $PIDFILE
     echo $! > $PIDFILE

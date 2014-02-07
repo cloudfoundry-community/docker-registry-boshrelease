@@ -1,0 +1,3 @@
+[submodule "src/docker-registry"]
+	path = src/docker-registry
+	url = https://github.com/dotcloud/docker-registry.git

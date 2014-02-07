@@ -1,0 +1,6 @@
+---
+name: docker-registry
+dependencies:
+- python
+files:
+- docker-registry/**/*
