@@ -2,7 +2,7 @@
 name: docker-registry
 packages:
 - python
-- docker-registry
+- docker_registry
 templates:
   bin/monit_debugger: bin/monit_debugger
   bin/docker_registry_ctl: bin/docker_registry_ctl

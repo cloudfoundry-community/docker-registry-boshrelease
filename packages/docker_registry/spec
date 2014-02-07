@@ -1,5 +1,5 @@
 ---
-name: docker-registry
+name: docker_registry
 dependencies:
 - python
 files:
