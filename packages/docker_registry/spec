@@ -2,5 +2,6 @@
 name: docker_registry
 dependencies:
 - python27
+- docker-registry-pip
 files:
 - docker-registry/**/*

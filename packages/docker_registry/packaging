@@ -1,5 +1,6 @@
 set -e # exit immediately if a simple command exits with a non-zero status
 set -u # report the usage of uninitialized variables
+set +x # show commands
 
 # Detect # of CPUs so make jobs can be parallelized
 CPUS=$(grep -c ^processor /proc/cpuinfo)
@@ -18,3 +19,13 @@ export PATH=/var/vcap/packages/python27/bin:$PATH
 
 # make shared libpython2.7.so available
 export LD_LIBRARY_PATH=/var/vcap/packages/python27/lib
+
+# Add this into jobs
+export PYTHONPATH=/var/vcap/packages/python27/vendor/lib/python
+
+packages=$(ls -t /var/vcap/packages/docker-registry-pip/*)
+echo "Installing pip packages: ${packages}"
+pip install --install-option="--home=${BOSH_INSTALL_TARGET}/vendor/" \
+  ${packages}
+
+exit 1

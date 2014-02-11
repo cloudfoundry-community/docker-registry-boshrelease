@@ -1,0 +1,5 @@
+---
+name: docker-registry-pip
+dependencies: []
+files:
+- docker-registry-pip/*

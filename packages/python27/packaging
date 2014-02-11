@@ -13,9 +13,6 @@ tar xzf python27/Python-${PYTHON_VERSION}.tgz
 cd Python-${PYTHON_VERSION}
 ./configure --prefix=${BOSH_INSTALL_TARGET} --enable-shared
 
-# Force python to look where we have sqlite3 installed
-sed -i -e "s/\/usr\/include\/sqlite3/\/var\/vcap\/packages\/sqlite\/include/g" setup.py
-
 make
 make install
 
@@ -32,11 +29,3 @@ tar xfz python/pip-${PIP_VERSION}.tar.gz
 cd pip-${PIP_VERSION}
 ${BOSH_INSTALL_TARGET}/bin/python2 setup.py install
 
-cd ${BOSH_COMPILE_TARGET}
-tar xfz python/pysqlite-${PYSQLITE_VERSION}.tar.gz
-cd pysqlite-${PYSQLITE_VERSION}
-# http://unixerrors.blogspot.com/2007/05/pysqlite-232_18.html
-# need to add the location of sqlite3.h to setup.cfg
-echo "include_dirs=/var/vcap/packages/sqlite/include" >> setup.cfg
-echo "library_dirs=/var/vcap/packages/sqlite/lib" >> setup.cfg
-${BOSH_INSTALL_TARGET}/bin/python2 setup.py install
