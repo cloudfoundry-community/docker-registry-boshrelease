@@ -1,7 +1,7 @@
 ---
 name: docker_registry
 packages:
-- python
+- python27
 - docker_registry
 templates:
   bin/monit_debugger: bin/monit_debugger

@@ -1,0 +1,42 @@
+set -e # exit immediately if a simple command exits with a non-zero status
+# set -u # report the usage of uninitialized variables
+
+export HOME=/var/vcap
+
+PYTHON_VERSION=2.7.3
+DISTRIBUTE_VERSION=0.6.28
+PIP_VERSION=1.0
+PYSQLITE_VERSION=2.6.3
+
+cd ${BOSH_COMPILE_TARGET}
+tar xzf python27/Python-${PYTHON_VERSION}.tgz
+cd Python-${PYTHON_VERSION}
+./configure --prefix=${BOSH_INSTALL_TARGET} --enable-shared
+
+# Force python to look where we have sqlite3 installed
+sed -i -e "s/\/usr\/include\/sqlite3/\/var\/vcap\/packages\/sqlite\/include/g" setup.py
+
+make
+make install
+
+# make shared libpython2.7.so available
+export LD_LIBRARY_PATH=${BOSH_INSTALL_TARGET}/lib
+
+cd ${BOSH_COMPILE_TARGET}
+tar xzf python/distribute-${DISTRIBUTE_VERSION}.tar.gz
+cd distribute-${DISTRIBUTE_VERSION}
+${BOSH_INSTALL_TARGET}/bin/python2 setup.py install
+
+cd ${BOSH_COMPILE_TARGET}
+tar xfz python/pip-${PIP_VERSION}.tar.gz
+cd pip-${PIP_VERSION}
+${BOSH_INSTALL_TARGET}/bin/python2 setup.py install
+
+cd ${BOSH_COMPILE_TARGET}
+tar xfz python/pysqlite-${PYSQLITE_VERSION}.tar.gz
+cd pysqlite-${PYSQLITE_VERSION}
+# http://unixerrors.blogspot.com/2007/05/pysqlite-232_18.html
+# need to add the location of sqlite3.h to setup.cfg
+echo "include_dirs=/var/vcap/packages/sqlite/include" >> setup.cfg
+echo "library_dirs=/var/vcap/packages/sqlite/lib" >> setup.cfg
+${BOSH_INSTALL_TARGET}/bin/python2 setup.py install

@@ -12,3 +12,9 @@ export HOME=/var/vcap
 PATH=/var/vcap/packages/python/bin:$PATH
 
 cp -a docker-registry/* $BOSH_INSTALL_TARGET/
+
+# install pygments pip package
+export PATH=/var/vcap/packages/python27/bin:$PATH
+
+# make shared libpython2.7.so available
+export LD_LIBRARY_PATH=/var/vcap/packages/python27/lib
