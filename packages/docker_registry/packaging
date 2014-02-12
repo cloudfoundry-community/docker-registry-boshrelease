@@ -1,31 +1,34 @@
 set -e # exit immediately if a simple command exits with a non-zero status
 set -u # report the usage of uninitialized variables
-set +x # show commands
+set -x # show commands
 
 # Detect # of CPUs so make jobs can be parallelized
 CPUS=$(grep -c ^processor /proc/cpuinfo)
  # Available variables
 # $BOSH_COMPILE_TARGET - where this package & spec'd source files are available
 # $BOSH_INSTALL_TARGET - where you copy/install files to be included in package
-export HOME=/var/vcap
 
+echo "Setting the PYTHONPATH with setuptools and pip site packages..."
+export PYTHONPATH=/var/vcap/packages/setuptools/lib/python2.7/site-packages:${PYTHONPATH:-}
+export PYTHONPATH=/var/vcap/packages/pip/lib/python2.7/site-packages:$PYTHONPATH
 
-PATH=/var/vcap/packages/python/bin:$PATH
+export PATH=/var/vcap/packages/python27/bin:$PATH
+export PATH=/var/vcap/packages/pip/bin:$PATH
 
 cp -a docker-registry/* $BOSH_INSTALL_TARGET/
 
-# install pygments pip package
-export PATH=/var/vcap/packages/python27/bin:$PATH
-
 # make shared libpython2.7.so available
-export LD_LIBRARY_PATH=/var/vcap/packages/python27/lib
+export LD_LIBRARY_PATH=/var/vcap/packages/python27/lib:${LD_LIBRARY_PATH:-}
 
-# Add this into jobs
-export PYTHONPATH=/var/vcap/packages/python27/vendor/lib/python
+cd $BOSH_INSTALL_TARGET
 
-packages=$(ls -t /var/vcap/packages/docker-registry-pip/*)
-echo "Installing pip packages: ${packages}"
-pip install --install-option="--home=${BOSH_INSTALL_TARGET}/vendor/" \
-  ${packages}
+env
 
-exit 1
+# FIXME currently installing from internet; not local files
+pip install \
+  -I \
+  --no-index \
+  --find-links=file://${BOSH_COMPILE_TARGET}/deps \
+  --no-allow-external  \
+  --install-option="--prefix=${BOSH_INSTALL_TARGET}" \
+  -r requirements.txt

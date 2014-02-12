@@ -1,7 +1,7 @@
 ---
 name: python27
+
 dependencies: []
+
 files:
-- python27/Python-2.7.3.tgz
-- python/distribute-0.6.28.tar.gz
-- python/pip-1.0.tar.gz
+- python/Python-2.7.6.tgz

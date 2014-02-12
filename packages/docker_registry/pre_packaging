@@ -1,0 +1,7 @@
+set -e -x
+
+mkdir -p $BUILD_DIR/deps
+
+ls -al
+
+pip install --download-cache ~/.pip/cache --download=$BUILD_DIR/deps -r docker-registry/requirements.txt

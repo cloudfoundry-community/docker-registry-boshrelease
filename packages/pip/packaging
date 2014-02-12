@@ -1,0 +1,16 @@
+set -e -x
+
+echo "Extracting pip..."
+tar xzvf python/pip-1.5.2.tar.gz
+
+echo "Creating the pip site packages..."
+mkdir -p ${BOSH_INSTALL_TARGET}/lib/python2.7/site-packages
+
+echo "Setting the PYTHONPATH with setuptools and pip site packages..."
+export PYTHONPATH=${BOSH_INSTALL_TARGET}/lib/python2.7/site-packages:$PYTHONPATH
+export PYTHONPATH=/var/vcap/packages/setuptools/lib/python2.7/site-packages:$PYTHONPATH
+
+echo "Installing pip..."
+pushd pip-1.5.2
+  /var/vcap/packages/python27/bin/python setup.py install --prefix=${BOSH_INSTALL_TARGET}
+popd

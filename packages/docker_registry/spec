@@ -2,6 +2,7 @@
 name: docker_registry
 dependencies:
 - python27
-- docker-registry-pip
+- pip
+- setuptools
 files:
 - docker-registry/**/*
