@@ -63,12 +63,6 @@ do
 	source $profile
 done
 
-for pythonlib in $(ls /var/vcap/packages/*/vendor/lib/python)
-do
-	export PYTHONPATH=$pythonlib:${PYTHONPATH:-}
-done
-
-
 PIDFILE=$RUN_DIR/$JOB_NAME.pid
 
 echo '$PATH' $PATH

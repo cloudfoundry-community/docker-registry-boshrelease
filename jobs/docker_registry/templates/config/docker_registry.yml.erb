@@ -96,6 +96,7 @@ openstack-swift:
 # https://developers.google.com/storage/docs/reference/v1/getting-startedv1#keys
 # for details on access and secret keys.
 google:
+  storage: google
   <% if_p("docker_registry.gs_access_key", "docker_registry.gs_secret_key",
           "docker_registry.gs_secure") do |gs_access_key, gs_secret_key, gs_secure| %>
   gs_access_key: <%= p("docker_registry.gs_access_key") %>

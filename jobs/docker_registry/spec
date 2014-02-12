@@ -2,11 +2,14 @@
 name: docker_registry
 packages:
 - python27
+- pip
+- setuptools
+- python-dependencies
 - docker_registry
 templates:
   bin/monit_debugger: bin/monit_debugger
   bin/docker_registry_ctl: bin/docker_registry_ctl
-  config/docker_registry.conf.erb: config/docker_registry.conf
+  config/docker_registry.yml.erb: config/docker_registry.yml
   config/gunicorn_config.py: config/gunicorn_config.py
   data/properties.sh.erb: data/properties.sh
   helpers/ctl_setup.sh: helpers/ctl_setup.sh
@@ -17,7 +20,7 @@ properties:
     default: info
   docker_registry.port:
     description: Port for access to Docker Registry
-    default: 80
+    default: 5000
   docker_registry.boto_bucket:
     description: FIXME
     default: docker_registry

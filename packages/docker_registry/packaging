@@ -15,6 +15,18 @@ export PYTHONPATH=/var/vcap/packages/pip/lib/python2.7/site-packages:$PYTHONPATH
 export PATH=/var/vcap/packages/python27/bin:$PATH
 export PATH=/var/vcap/packages/pip/bin:$PATH
 
+source /var/vcap/packages/python-dependencies/profile.sh
+
+pushd /var/vcap/packages/python-dependencies/apt
+ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/'
+popd
+
+
+
+# backports.lzma setup.py has hardcoded list of places to find libs; hijack ~/lib & ~/include
+cp -a /var/vcap/packages/python-dependencies/apt/usr/lib/* /usr/lib
+cp -a /var/vcap/packages/python-dependencies/apt/usr/include/* /usr/include
+
 cp -a docker-registry/* $BOSH_INSTALL_TARGET/
 
 # make shared libpython2.7.so available
@@ -30,5 +42,5 @@ pip install \
   --no-index \
   --find-links=file://${BOSH_COMPILE_TARGET}/deps \
   --no-allow-external  \
-  --install-option="--prefix=${BOSH_INSTALL_TARGET}" \
+  --install-option="--prefix=${BOSH_INSTALL_TARGET}/vendor" \
   -r requirements.txt
