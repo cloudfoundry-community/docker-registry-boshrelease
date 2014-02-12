@@ -1,4 +1,4 @@
-# BOSH Release for docker-registry
+# Private Docker Registry deployed with BOSH
 
 Run your own private Docker Registry in standalone mode (without requiring the public index) on AWS, OpenStack or vSphere.
 
