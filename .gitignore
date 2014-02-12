@@ -16,3 +16,4 @@ blobs/*
 #*
 tmp
 my*.yml
+compiled_packages
