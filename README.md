@@ -41,6 +41,16 @@ templates/make_manifest warden
 bosh -n deploy
 ```
 
+### Storage backends
+
+By default, a persistent disk is used to store the pushed docker repositories. You can also configure to use AWS S3, OpenStack Swift or Glance, and Google Compute.
+
+See the job spec for the configuration to pass through:
+
+* [AWS S3](https://github.com/cloudfoundry-community/docker-registry-boshrelease/blob/master/jobs/docker_registry/spec#L35-L46)
+* [Swift](https://github.com/cloudfoundry-community/docker-registry-boshrelease/blob/master/jobs/docker_registry/spec#L48-L59)
+* [Google Compute](https://github.com/cloudfoundry-community/docker-registry-boshrelease/blob/master/jobs/docker_registry/spec#L61-L67)
+
 
 ### Override security groups
 
