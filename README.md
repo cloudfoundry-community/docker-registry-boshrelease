@@ -27,19 +27,20 @@ cd docker-registry-boshrelease
 bosh upload release releases/docker-registry-1.yml
 ```
 
-For [bosh-lite](https://github.com/cloudfoundry/bosh-lite), you can quickly create a deployment manifest & deploy a 3 VM cluster:
-
-```
-templates/make_manifest warden
-bosh -n deploy
-```
-
 For AWS EC2, create a single VM:
 
 ```
 templates/make_manifest aws-ec2
 bosh -n deploy
 ```
+
+For developers of the release using [bosh-lite](https://github.com/cloudfoundry/bosh-lite), you can quickly create a deployment manifest and deploy:
+
+```
+templates/make_manifest warden
+bosh -n deploy
+```
+
 
 ### Override security groups
 
@@ -57,7 +58,7 @@ networks:
         - docker_registry
 ```
 
-Where `- docker-registry` means you wish to use an existing security group called `docker-registry`.
+Where `- docker-registry` means you wish to use an existing security group called `docker_registry`.
 
 You now suffix this file path to the `make_manifest` command:
 
