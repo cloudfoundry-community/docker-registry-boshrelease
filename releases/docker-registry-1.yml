@@ -1,0 +1,55 @@
+---
+packages:
+- name: docker_registry
+  version: 1
+  sha1: !binary |-
+    ZjhkZmQ2ZTBkNWNlNTI1ZjRhNDJiODdlZjllMzk5NTc4MTI1NDE3NQ==
+  fingerprint: !binary |-
+    OTc4YzE5MmM4MTU5ZWFiOWU2NzAxNjAzMzQwZTZlM2Y0NzIyYTcyNQ==
+  dependencies:
+  - python27
+  - pip
+  - setuptools
+  - python-dependencies
+- name: pip
+  version: 1
+  sha1: !binary |-
+    MDk4ZDg4ZDFmNGY5MzU3OTNmOWViZGI0ZWZhZmIzZWU5OWY5ZDI3MQ==
+  fingerprint: !binary |-
+    YjYyMDA1NGNlNGVjNjA3OWI2YmQ5MjhiM2VmNThjMDI4Y2I1OTIxMw==
+  dependencies:
+  - python27
+  - setuptools
+- name: python-dependencies
+  version: 1
+  sha1: !binary |-
+    ZDcwYzc1NzdiZThkMWZhMjgxNzFiZTNjOWI4NjQ5NjRjMmYzZGQyMA==
+  fingerprint: !binary |-
+    YjYzMGFmNWIzMmVhZWI1MDg0NWRkYjhlZTAwZTEwNTg3MjY3ZmI5ZQ==
+  dependencies: []
+- name: python27
+  version: 1
+  sha1: !binary |-
+    YTZmY2VhMjI0N2Y1MGQzMmM2Mzg3NDVlZDRkNzVhMDBiYTA2YTNlNA==
+  fingerprint: !binary |-
+    NGFiNTBkNTg5OGI4ZDFhZTZiZjY1Yzg4NTM1YTg0Mzg2YWY0YTE4Yg==
+  dependencies: []
+- name: setuptools
+  version: 1
+  sha1: !binary |-
+    OGU5ODYzZjEzMjk3ZGZkYmI5ZTBmMmZlMDRlYzA3ZTVhOWYzNjc1Yg==
+  fingerprint: !binary |-
+    MjI4YWNmODkxZWNjOWIwYWNmYjNjZDkwYjc3MGE2NzIxYjI5MTA1Yg==
+  dependencies:
+  - python27
+jobs:
+- name: docker_registry
+  version: 1
+  fingerprint: !binary |-
+    OTQ3NzQ4ODRmODhiNjA1Mjg1MGY5ODZmOTFlNmExY2U1ODgyYjU4Mg==
+  sha1: !binary |-
+    ZGQ2ZDg5ODJmZjA5Mjg5YzVhYWFkOWJmZGRjODEyMWM4ZjQ4NTk4Zg==
+commit_hash: a79fd463
+uncommitted_changes: true
+name: docker-registry
+version: 1

@@ -4,3 +4,4 @@ blobstore:
   options:
     bucket_name: docker-registry-boshrelease
     encryption_key: docker-registry-boshrelease
+final_name: docker-registry

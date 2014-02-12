@@ -58,7 +58,7 @@ networks:
         - docker_registry
 ```
 
-Where `- docker-registry` means you wish to use an existing security group called `docker_registry`.
+Where `- docker_registry` means you wish to use an existing security group called `docker_registry`.
 
 You now suffix this file path to the `make_manifest` command:
 
