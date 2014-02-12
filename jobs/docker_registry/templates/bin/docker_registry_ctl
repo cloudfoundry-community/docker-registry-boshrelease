@@ -28,7 +28,7 @@ case $1 in
 
     cd /var/vcap/packages/docker_registry
     exec chpst -u vcap:vcap \
-        gunicorn -w 1 wsgi:application --pid=$PIDFILE \
+        gunicorn -w 8 wsgi:application --pid=$PIDFILE \
             >>$LOG_DIR/$JOB_NAME.stdout.log \
             2>>$LOG_DIR/$JOB_NAME.stderr.log
 
