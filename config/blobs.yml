@@ -1,1 +1,51 @@
---- {}
+---
+apt/python-dependencies/libevent-core-1.4-2_1.4.13-stable-1_amd64.deb:
+  object_id: da5cb0a2-81f5-4e4d-8b05-d1b62d323a8b
+  sha: !binary |-
+    OGZiZTI0MmM5MjJmYWJmYzMxMzYyY2M0MWUzZWU0YmIyMTZmYWZmMA==
+  size: 30430
+apt/python-dependencies/libevent-dev_1.4.13-stable-1_amd64.deb:
+  object_id: b92bb322-cbc3-4f56-a42b-4cae46145678
+  sha: !binary |-
+    NGU0ODU5NGViOWU2MzFjZmJmNGRmZDY1YjVjYWVlNGVmMDgyYTYxMw==
+  size: 172988
+apt/python-dependencies/libevent-extra-1.4-2_1.4.13-stable-1_amd64.deb:
+  object_id: 553a7974-57e4-4de4-be11-56cab71e667a
+  sha: !binary |-
+    MDMwNTY2MzUwZGU0MjllYTBmZWQ0ZDQ3ZDZkMTg3NGM4YmFjOTFhNA==
+  size: 51708
+apt/python-dependencies/liblzma-dev_4.999.9beta+20091116-1_amd64.deb:
+  object_id: 82d6fb8d-d59f-4dec-aba3-64023f155a99
+  sha: !binary |-
+    MDdhYWZjMDE2OGE0OTlmYzllNzRjMWZiYjY2MGE3MGIyNjZmN2Q0MA==
+  size: 216076
+apt/python-dependencies/liblzma1_4.999.9beta+20091116-1_amd64.deb:
+  object_id: 97b995f5-7af1-4eb7-a4f8-aa0810f03368
+  sha: !binary |-
+    YWU4MDBiZjJiNDc3ODM2MTViNzNlN2ZjZmVjMjBiMzc3NmNjZjU5ZQ==
+  size: 151056
+apt/python-dependencies/libssl-dev_0.9.8k-7ubuntu8.15_amd64.deb:
+  object_id: c0f4dfcf-ef40-4612-9327-ac371f6ec445
+  sha: !binary |-
+    ZGM4Nzc1ODRlN2U5MmNmNDQ1MzcxZGRhZDRiMTRmOWJlMGNlZGUyYg==
+  size: 2158442
+apt/python-dependencies/libssl0.9.8_0.9.8k-7ubuntu8.15_amd64.deb:
+  object_id: 2eee0201-afbf-4db6-b766-be3210e7f057
+  sha: !binary |-
+    YzMwZTg1ZGFiOTRhZGE3NzgyMWM1ZDk4YTE2M2Y2ZGJlYjI2OWNjZQ==
+  size: 983888
+python/pip-1.5.2.tar.gz:
+  object_id: 7a87511b-c418-4595-a860-d9d32917377a
+  sha: !binary |-
+    NGY0M2E2YjA0ZjgzYjhkODNiZWU3MDI3NTBmZjM1YmUyYTJiNmFmMQ==
+  size: 1079904
+python/Python-2.7.6.tgz:
+  object_id: 709241d3-9921-437a-a265-64045fca8e75
+  sha: !binary |-
+    ODMyOGQ5ZjFkNTU1NzRhMjg3ZGYzODRmNDkzMWEzOTQyZjAzZGE2NA==
+  size: 14725931
+python/setuptools-2.2b1.tar.gz:
+  object_id: c6ae90f4-118e-4e24-92ea-2827bfbad6ff
+  sha: !binary |-
+    OTkxM2IwMTBlNGEwY2U0NDNiYzZiZTIxZDkzYTRlY2RlOTM2YTBmNQ==
+  size: 878504
