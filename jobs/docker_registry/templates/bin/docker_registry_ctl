@@ -22,13 +22,17 @@ case $1 in
     cp -a /var/vcap/packages/python-dependencies/apt/usr/lib/* /usr/lib
     cp -a /var/vcap/packages/python-dependencies/apt/usr/include/* /usr/include
 
+    cp -a /var/vcap/packages/docker_registry/config/boto.cfg /etc/boto.cfg
+
     export SETTINGS_FLAVOR="local"
     export DOCKER_REGISTRY_CONFIG=$JOB_DIR/config/docker_registry.yml
     export PORT_WWW=$PORT
 
     cd /var/vcap/packages/docker_registry
+
     exec chpst -u vcap:vcap \
         gunicorn -w 8 wsgi:application --pid=$PIDFILE \
+          -c $JOB_DIR/config/gunicorn_config.py \
             >>$LOG_DIR/$JOB_NAME.stdout.log \
             2>>$LOG_DIR/$JOB_NAME.stderr.log
 
