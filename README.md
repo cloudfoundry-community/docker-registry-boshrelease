@@ -1,5 +1,21 @@
 # BOSH Release for docker-registry
 
+Run your own private Docker Registry in standalone mode (without requiring the public index) on AWS, OpenStack or vSphere.
+
+For example, tagging and pushing the public `ubuntu:13.04` repository to an AWS-deployed Docker repository:
+
+```
+$ docker tag ubuntu:13.04 ec2-54-80-246-141.compute-1.amazonaws.com:5000/ubuntu-1304
+$ docker push ec2-54-80-246-141.compute-1.amazonaws.com:5000/ubuntu-1304
+The push refers to a repository [ec2-54-80-246-141.compute-1.amazonaws.com:5000/ubuntu-1304] (len: 1)
+Sending image list
+Pushing repository ec2-54-80-246-141.compute-1.amazonaws.com:5000/ubuntu-1304 (1 tags)
+511136ea3c5a: Image successfully pushed 
+f323cf34fd77: Image successfully pushed 
+eb601b8965b8: Pushing [==================>                                ] 68.77 MB/181.2 MB 4m1s
+```
+
+
 ## Usage
 
 To use this bosh release, first upload it to your bosh:
