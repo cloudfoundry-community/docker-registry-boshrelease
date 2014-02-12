@@ -18,13 +18,6 @@ templates/make_manifest warden
 bosh -n deploy
 ```
 
-For Openstack (Nova Networks), create a single VM:
-
-```
-templates/make_manifest openstack-nova
-bosh -n deploy
-```
-
 For AWS EC2, create a single VM:
 
 ```
@@ -45,7 +38,7 @@ networks:
     type: dynamic
     cloud_properties:
       security_groups:
-        - docker-registry
+        - docker_registry
 ```
 
 Where `- docker-registry` means you wish to use an existing security group called `docker-registry`.

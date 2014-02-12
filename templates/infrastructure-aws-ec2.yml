@@ -13,8 +13,8 @@ jobs:
     instances: 1
     networks:
       - name: (( meta.network_name ))
-  - name: docker-registry_z1
-    instances: 2
+  - name: docker_registry_z1
+    instances: 0
     networks:
       - name: (( meta.network_name ))
     properties:
