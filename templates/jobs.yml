@@ -27,4 +27,4 @@ jobs:
 
 networks: (( merge ))
 
-properties: {}
+properties: (( merge ))

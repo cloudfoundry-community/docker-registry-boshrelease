@@ -11,3 +11,5 @@ director_uuid: PLACEHOLDER-DIRECTOR-UUID
 releases:
   - name: docker-registry
     version: latest
+
+properties: {}
