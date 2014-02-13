@@ -6,8 +6,9 @@ infrastructure=$1
 template_prefix="docker-registry"
 
 if [ "$infrastructure" != "aws-ec2" ] && \
-    [ "$infrastructure" != "warden" ] ; then
-  echo "usage: ./make_manifest <aws-ec2|warden>"
+    [ "$infrastructure" != "warden" ] && \
+    [ "$infrastructure" != "openstack" ]; then
+  echo "usage: ./make_manifest <aws-ec2|openstack|warden>"
   exit 1
 fi
 
@@ -29,6 +30,13 @@ fi
 if [[ $infrastructure = "aws-ec2" ]]; then
   if [[ $DIRECTOR_CPI != "aws" ]]; then
     echo "Not targeting an AWS BOSH. Please use 'bosh target' before running this script."
+    exit 1
+  fi
+fi
+
+if [[ $infrastructure = "openstack" ]]; then
+  if [[ $DIRECTOR_CPI != "openstack" ]]; then
+    echo "Not targeting an Openstack BOSH. Please use 'bosh target' before running this script."
     exit 1
   fi
 fi

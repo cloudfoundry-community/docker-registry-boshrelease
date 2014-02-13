@@ -56,11 +56,11 @@ swift:
           "docker_registry.swift_user", "docker_registry.swift_password",
           "docker_registry.swift_tenant_name") do |swift_authurl, swift_container, swift_user, swift_password, swift_tenant_name| %>
   # keystone authorization
-  swift_authurl: <%= swift_region_name %>
-  swift_container: <%= swift_region_name %>
-  swift_user: <%= swift_region_name %>
-  swift_password: <%= swift_region_name %>
-  swift_tenant_name: <%= swift_region_name %>
+  swift_authurl: <%= swift_authurl %>
+  swift_container: <%= swift_container %>
+  swift_user: <%= swift_user %>
+  swift_password: <%= swift_password %>
+  swift_tenant_name: <%= swift_tenant_name %>
   <% end %>
   <% if_p("docker_registry.swift_region_name") do |swift_region_name| %>
   swift_region_name: <%= swift_region_name %>
@@ -81,11 +81,11 @@ openstack-swift:
           "docker_registry.swift_user", "docker_registry.swift_password",
           "docker_registry.swift_tenant_name") do |swift_authurl, swift_container, swift_user, swift_password, swift_tenant_name| %>
   # keystone authorization
-  swift_authurl: <%= swift_region_name %>
-  swift_container: <%= swift_region_name %>
-  swift_user: <%= swift_region_name %>
-  swift_password: <%= swift_region_name %>
-  swift_tenant_name: <%= swift_region_name %>
+  swift_authurl: <%= swift_authurl %>
+  swift_container: <%= swift_container %>
+  swift_user: <%= swift_user %>
+  swift_password: <%= swift_password %>
+  swift_tenant_name: <%= swift_tenant_name %>
   <% end %>
   <% if_p("docker_registry.swift_region_name") do |swift_region_name| %>
   swift_region_name: <%= swift_region_name %>
