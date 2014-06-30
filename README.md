@@ -1,4 +1,5 @@
-# Private Docker Registry deployed with BOSH
+Private Docker Registry deployed with BOSH
+==========================================
 
 Run your own private Docker Registry in standalone mode (without requiring the public index) on AWS, OpenStack or vSphere.
 
@@ -10,21 +11,25 @@ $ docker push ec2-54-80-246-141.compute-1.amazonaws.com:5000/ubuntu-1304
 The push refers to a repository [ec2-54-80-246-141.compute-1.amazonaws.com:5000/ubuntu-1304] (len: 1)
 Sending image list
 Pushing repository ec2-54-80-246-141.compute-1.amazonaws.com:5000/ubuntu-1304 (1 tags)
-511136ea3c5a: Image successfully pushed 
-f323cf34fd77: Image successfully pushed 
+511136ea3c5a: Image successfully pushed
+f323cf34fd77: Image successfully pushed
 eb601b8965b8: Pushing [==================>                                ] 68.77 MB/181.2 MB 4m1s
 ```
 
+Usage
+-----
 
-## Usage
-
-To use this bosh release, first upload it to your bosh:
+To use this BOSH release, first upload it to your bosh:
 
 ```
-bosh target BOSH_HOST
+bosh upload release https://docker-registry-boshrelease.s3.amazonaws.com/boshrelease-docker-registry-1.tgz
+```
+
+To deploy it you will need the source repository that contains templates:
+
+```
 git clone https://github.com/cloudfoundry-community/docker-registry-boshrelease.git
 cd docker-registry-boshrelease
-bosh upload release releases/docker-registry-1.yml
 ```
 
 For AWS EC2, create a single VM:
@@ -47,10 +52,9 @@ By default, a persistent disk is used to store the pushed docker repositories. Y
 
 See the job spec for the configuration to pass through:
 
-* [AWS S3](https://github.com/cloudfoundry-community/docker-registry-boshrelease/blob/master/jobs/docker_registry/spec#L35-L46)
-* [Swift](https://github.com/cloudfoundry-community/docker-registry-boshrelease/blob/master/jobs/docker_registry/spec#L48-L59)
-* [Google Compute](https://github.com/cloudfoundry-community/docker-registry-boshrelease/blob/master/jobs/docker_registry/spec#L61-L67)
-
+- [AWS S3](https://github.com/cloudfoundry-community/docker-registry-boshrelease/blob/master/jobs/docker_registry/spec#L35-L46)
+- [Swift](https://github.com/cloudfoundry-community/docker-registry-boshrelease/blob/master/jobs/docker_registry/spec#L48-L59)
+- [Google Compute](https://github.com/cloudfoundry-community/docker-registry-boshrelease/blob/master/jobs/docker_registry/spec#L61-L67)
 
 ### Override security groups
 
@@ -58,7 +62,7 @@ For AWS & Openstack, the default deployment assumes there is a `default` securit
 
 Create a file `my-networking.yml`:
 
-``` yaml
+```yaml
 ---
 networks:
   - name: docker-registry1
