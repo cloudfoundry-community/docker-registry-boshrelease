@@ -1,9 +1,0 @@
----
-name: pip
-
-dependencies:
-- python27
-- setuptools
-
-files:
-- python/pip-1.5.2.tar.gz

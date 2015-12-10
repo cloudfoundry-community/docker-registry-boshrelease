@@ -1,0 +1,25 @@
+---
+name: registry
+packages:
+- golang
+- docker
+templates:
+  bin/ctl: bin/ctl
+  bin/monit_debugger: bin/monit_debugger
+  config/registry.conf: config/registry.conf
+  data/properties.sh.erb: data/properties.sh
+  helpers/ctl_setup.sh: helpers/ctl_setup.sh
+  helpers/ctl_utils.sh: helpers/ctl_utils.sh
+  tls/cert.pem: tls/cert.pem
+  tls/key.pem: tls/key.pem
+properties:
+  docker.registry.port:
+    description: What port to run the Docker Registry v2 API on
+    default: 5000
+
+  docker.registry.ssl.cert:
+    description: PEM-encoded SSL certificate for HTTPS registry operation
+    default: ~
+  docker.registry.ssl.key:
+    description: PEM-encoded private key for HTTPS registry operation
+    default: ~

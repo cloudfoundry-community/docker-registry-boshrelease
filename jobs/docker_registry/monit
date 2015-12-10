@@ -1,5 +1,0 @@
-check process docker_registry
-  with pidfile /var/vcap/sys/run/docker_registry/docker_registry.pid
-  start program "/var/vcap/jobs/docker_registry/bin/monit_debugger docker_registry_ctl '/var/vcap/jobs/docker_registry/bin/docker_registry_ctl start'"
-  stop program "/var/vcap/jobs/docker_registry/bin/monit_debugger docker_registry_ctl '/var/vcap/jobs/docker_registry/bin/docker_registry_ctl stop'"
-  group vcap

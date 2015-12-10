@@ -9,21 +9,12 @@ update:
   serial: false
 
 jobs:
-  - name: docker_registry_leader_z1
-    template: docker_registry
-    instances: 0
+  - name: registry
+    templates:
+      - { release: docker-registry, name: registry }
+    instances: 1
     resource_pool: small_z1
     networks: (( merge ))
-  - name: docker_registry_z1
-    template: docker_registry
-    instances: 0
-    resource_pool: small_z1
-    networks: (( merge ))
-    update:
-      canaries: 10
-    properties:
-      docker_registry:
-        leader_address: (( merge ))
 
 networks: (( merge ))
 
