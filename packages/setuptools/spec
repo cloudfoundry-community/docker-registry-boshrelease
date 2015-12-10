@@ -1,8 +1,0 @@
----
-name: setuptools
-
-dependencies:
-- python27
-
-files:
-- python/setuptools-2.2b1.tar.gz

@@ -9,17 +9,10 @@ meta:
     version: latest
 
 jobs:
-  - name: docker_registry_leader_z1
+  - name: registry
     instances: 1
     networks:
       - name: (( meta.network_name ))
-  - name: docker_registry_z1
-    instances: 0
-    networks:
-      - name: (( meta.network_name ))
-    properties:
-      docker_registry:
-        leader_address: (( "0.docker-registry-leader-z1.docker-registry1." meta.environment "." meta.dns_root ))
 
 compilation:
   cloud_properties:

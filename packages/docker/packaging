@@ -1,0 +1,27 @@
+set -e # exit immediately if a simple command exits with a non-zero status
+set -u # report the usage of uninitialized variables
+
+# Detect # of CPUs so make jobs can be parallelized
+CPUS=$(grep -c ^processor /proc/cpuinfo)
+ # Available variables
+# $BOSH_COMPILE_TARGET - where this package & spec'd source files are available
+# $BOSH_INSTALL_TARGET - where you copy/install files to be included in package
+export HOME=/var/vcap
+
+#
+# NOTE: newer releases of docker/distribution can be found on the
+#       github page: https://github.com/docker/distribution/releases
+#
+
+REPO_NAME=github.com/docker/distribution
+REPO_DIR=${BOSH_INSTALL_TARGET}/src/${REPO_NAME}
+
+tar xzf docker/distribution-2.2.1.tar.gz
+mkdir -p $(dirname $REPO_DIR)
+mv distribution-2.2.1 $REPO_DIR
+
+export GOROOT=$(readlink -nf /var/vcap/packages/golang)
+export GOPATH=$BOSH_INSTALL_TARGET:${REPO_DIR}/Godeps/_workspace
+export PATH=$GOROOT/bin:$PATH
+
+go install ${REPO_NAME}/cmd/registry

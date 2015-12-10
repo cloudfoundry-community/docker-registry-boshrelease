@@ -3,7 +3,7 @@ meta:
   network_name: (( merge ))
 
   stemcell:
-    name: bosh-warden-boshlite-ubuntu
+    name: bosh-warden-boshlite-ubuntu-trusty-go_agent
     version: latest
 
 update:
@@ -13,19 +13,11 @@ update:
   update_watch_time: 1000-30000
 
 jobs:
-  - name: docker_registry_leader_z1
+  - name: registry
     instances: 1
     networks:
       - name: (( meta.network_name ))
         static_ips: (( static_ips(0) ))
-  - name: docker_registry_z1
-    instances: 0
-    networks:
-      - name: (( meta.network_name ))
-        static_ips: ~
-    properties:
-      docker_registry:
-        leader_address: (( jobs.docker_registry_leader_z1.networks.docker_registry1.static_ips.[0] ))
 
 compilation:
   cloud_properties:
@@ -38,70 +30,11 @@ resource_pools:
 
 networks:
 - name: (( meta.network_name ))
-  # Assumes up to 5 VMs, including 1 static and 4 dynamic.
-  # Plus 5 (double the size) unused IPs, due to BOSH bug/quirk.
   subnets:
-  - cloud_properties:
+  - range: 10.244.4.0/24
+    cloud_properties:
       name: random
-    range: 10.244.2.0/30
     reserved:
-    - 10.244.2.1
+    - 10.244.4.1 - 10.244.4.10
     static:
-    - 10.244.2.2
-
-  - cloud_properties:
-      name: random
-    range: 10.244.2.4/30
-    reserved:
-    - 10.244.2.5
-    static: []
-  - cloud_properties:
-      name: random
-    range: 10.244.2.8/30
-    reserved:
-    - 10.244.2.9
-    static: []
-  - cloud_properties:
-      name: random
-    range: 10.244.2.12/30
-    reserved:
-    - 10.244.2.13
-    static: []
-  - cloud_properties:
-      name: random
-    range: 10.244.2.16/30
-    reserved:
-    - 10.244.2.17
-    static: []
-
-  # Bonus double-sized network required due to BOSH oddity
-  - cloud_properties:
-      name: random
-    range: 10.244.2.20/30
-    reserved:
-    - 10.244.2.21
-    static: []
-  - cloud_properties:
-      name: random
-    range: 10.244.2.24/30
-    reserved:
-    - 10.244.2.25
-    static: []
-  - cloud_properties:
-      name: random
-    range: 10.244.2.28/30
-    reserved:
-    - 10.244.2.29
-    static: []
-  - cloud_properties:
-      name: random
-    range: 10.244.2.32/30
-    reserved:
-    - 10.244.2.33
-    static: []
-  - cloud_properties:
-      name: random
-    range: 10.244.2.36/30
-    reserved:
-    - 10.244.2.37
-    static: []
+    - 10.244.4.11
