@@ -1,5 +1,5 @@
 check process registry
   with pidfile /var/vcap/sys/run/registry/registry.pid
-  start program "/var/vcap/jobs/registry/bin/monit_debugger registry_ctl '/var/vcap/jobs/registry/bin/ctl start'"
-  stop program "/var/vcap/jobs/registry/bin/monit_debugger registry_ctl '/var/vcap/jobs/registry/bin/ctl stop'"
+  start program "/var/vcap/jobs/registry/bin/monit_debugger registry '/var/vcap/jobs/registry/bin/ctl start'"
+  stop program "/var/vcap/jobs/registry/bin/monit_debugger registry '/var/vcap/jobs/registry/bin/ctl stop'"
   group vcap

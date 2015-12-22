@@ -1,6 +1,4 @@
-meta:
-  environment: ~
-
+---
 update:
   canaries: 1
   max_in_flight: 50
@@ -14,8 +12,3 @@ jobs:
       - { release: docker-registry, name: registry }
     instances: 1
     resource_pool: small_z1
-    networks: (( merge ))
-
-networks: (( merge ))
-
-properties: (( merge ))

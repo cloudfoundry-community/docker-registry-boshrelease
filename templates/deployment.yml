@@ -1,24 +1,21 @@
+---
 meta:
-  environment: (( merge ))
-  stemcell: (( merge ))
+  environment: (( param "Please define your deployment environment" ))
+  stemcell: (( param "No stemcell detected..." ))
 
-name: (( meta.environment ))
+name: (( grab meta.environment ))
 
-director_uuid: (( merge ))
+director_uuid: (( param "No director UUID supplied..." ))
 
-releases: (( merge ))
-
-networks: (( merge ))
-
-jobs: (( merge ))
-
-properties: (( merge ))
+releases: (( param "No releases defined" ))
+networks: (( param "No networks defined" ))
+jobs:     (( param "No jobs defined" ))
 
 compilation:
   workers: 6
   network: docker_registry1
   reuse_compilation_vms: true
-  cloud_properties: (( merge ))
+  cloud_properties: (( param "Cloud properties must be specified by the infrastructure templates" ))
 
 update:
   canaries: 1
@@ -30,6 +27,5 @@ update:
 resource_pools:
   - name: small_z1
     network: docker_registry1
-    size: (( auto ))
-    stemcell: (( meta.stemcell ))
-    cloud_properties: (( merge ))
+    stemcell: (( grab meta.stemcell ))
+    cloud_properties: (( param "Cloud properties must be specified by the infrastructure templates" ))

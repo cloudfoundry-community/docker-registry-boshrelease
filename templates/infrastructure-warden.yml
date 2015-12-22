@@ -1,6 +1,7 @@
+---
 meta:
   environment: docker-registry-warden
-  network_name: (( merge ))
+  network_name: (( param "You must define a network name for your Warden/BOSH-lite deployment" ))
 
   stemcell:
     name: bosh-warden-boshlite-ubuntu-trusty-go_agent
@@ -16,7 +17,7 @@ jobs:
   - name: registry
     instances: 1
     networks:
-      - name: (( meta.network_name ))
+      - name: (( grab meta.network_name ))
         static_ips: (( static_ips(0) ))
 
 compilation:
@@ -29,7 +30,7 @@ resource_pools:
       name: random
 
 networks:
-- name: (( meta.network_name ))
+- name: (( grab meta.network_name ))
   subnets:
   - range: 10.244.4.0/24
     cloud_properties:

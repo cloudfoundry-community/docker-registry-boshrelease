@@ -1,0 +1,27 @@
+---
+name: proxy
+packages:
+  - nginx
+templates:
+  bin/ctl: bin/ctl
+  bin/monit_debugger: bin/monit_debugger
+  config/nginx.conf: config/nginx.conf
+  data/properties.sh.erb: data/properties.sh
+  helpers/ctl_setup.sh: helpers/ctl_setup.sh
+  helpers/ctl_utils.sh: helpers/ctl_utils.sh
+  tls/cert.pem: tls/cert.pem
+  tls/key.pem: tls/key.pem
+properties:
+  docker.proxy.backend.hosts:
+    description: A list of the IP addresses of each Docker proxy to load-balance
+    default: []
+  docker.proxy.backend.port:
+    description: TCP Port that each backend registry is listening on
+    default: 5000
+
+  docker.proxy.ssl.cert:
+    description: PEM-encoded SSL certificate for HTTPS proxy operation
+    default: ~
+  docker.proxy.ssl.key:
+    description: PEM-encoded private key for HTTPS proxy operation
+    default: ~

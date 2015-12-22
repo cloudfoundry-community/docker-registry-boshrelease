@@ -1,0 +1,15 @@
+---
+name: cache
+packages:
+  - redis
+templates:
+  bin/ctl: bin/ctl
+  bin/monit_debugger: bin/monit_debugger
+  config/redis.conf: config/redis.conf
+  data/properties.sh.erb: data/properties.sh
+  helpers/ctl_setup.sh: helpers/ctl_setup.sh
+  helpers/ctl_utils.sh: helpers/ctl_utils.sh
+properties:
+  docker.cache.redis.loglevel:
+    description: Log verbosity level for Redis cache server
+    default: warning

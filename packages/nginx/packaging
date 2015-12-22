@@ -1,0 +1,28 @@
+set -e # exit immediately if a simple command exits with a non-zero status
+set -u # report the usage of uninitialized variables
+
+# Detect # of CPUs so make jobs can be parallelized
+CPUS=$(grep -c ^processor /proc/cpuinfo)
+ # Available variables
+# $BOSH_COMPILE_TARGET - where this package & spec'd source files are available
+# $BOSH_INSTALL_TARGET - where you copy/install files to be included in package
+export HOME=/var/vcap
+
+#
+# NOTE: new versions of nginx can be found on the official
+#       download page: http://nginx.org/en/download.html
+#
+#       You can download PCRE from its FTP site:
+#       ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/
+#
+
+tar xzf nginx/pcre-8.38.tar.gz
+tar xzf nginx/nginx-1.8.0.tar.gz
+(cd nginx-1.8.0
+ ./configure \
+   --user=vcap --group=vcap \
+   --prefix=${BOSH_INSTALL_TARGET} \
+   --with-pcre=../pcre-8.38 \
+   --with-pcre-jit \
+   --with-http_ssl_module
+ make -j $CPUS install)

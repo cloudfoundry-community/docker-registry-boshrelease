@@ -1,8 +1,7 @@
+---
 meta:
-  environment: (( merge ))
-  dns_root: (( merge ))
-  security_groups: (( merge ))
-  network_name: (( merge ))
+  security_groups: (( param "You must define security groups for your AWS deployment" ))
+  network_name:    (( param "You must define a network name for your AWS deployment" ))
 
   stemcell:
     name: bosh-aws-xen-ubuntu
@@ -12,7 +11,7 @@ jobs:
   - name: registry
     instances: 1
     networks:
-      - name: (( meta.network_name ))
+      - name: (( grab meta.network_name ))
 
 compilation:
   cloud_properties:
@@ -27,7 +26,7 @@ networks:
   - name: floating
     type: vip
     cloud_properties: {}
-  - name: (( meta.network_name ))
+  - name: (( grab meta.network_name ))
     type: dynamic
     cloud_properties:
-      security_groups: (( meta.security_groups ))
+      security_groups: (( grab meta.security_groups ))

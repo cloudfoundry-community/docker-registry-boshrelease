@@ -51,7 +51,8 @@ echo $DIRECTOR_NAME $DIRECTOR_CPI $DIRECTOR_UUID
 perl -pi -e "s/PLACEHOLDER-DIRECTOR-UUID/$DIRECTOR_UUID/g" $tmpdir/stub-with-uuid.yml
 perl -pi -e "s/NAME/$NAME/g" $tmpdir/stub-with-uuid.yml
 
-spiff merge \
+spruce merge \
+  --prune meta \
   $templates/deployment.yml \
   $templates/jobs.yml \
   $templates/infrastructure-${infrastructure}.yml \

@@ -1,8 +1,6 @@
 meta:
-  environment: (( merge ))
-  dns_root: (( merge ))
-  security_groups: (( merge ))
-  network_name: (( merge ))
+  security_groups: (( param "You must define security groups for your Openstack deployment" ))
+  network_name:    (( param "You must define a network name for your Openstack deployment" ))
 
   stemcell:
     name: bosh-openstack-kvm-ubuntu
@@ -12,7 +10,7 @@ jobs:
   - name: registry
     instances: 1
     networks:
-      - name: (( meta.network_name ))
+      - name: (( grab meta.network_name ))
 
 compilation:
   cloud_properties:
@@ -27,9 +25,7 @@ networks:
   - name: floating
     type: vip
     cloud_properties: {}
-  - name: (( meta.network_name ))
+  - name: (( grab meta.network_name ))
     type: dynamic
     cloud_properties:
-      security_groups: (( meta.security_groups ))
-
-properties: (( merge ))
+      security_groups: (( grab meta.security_groups ))
