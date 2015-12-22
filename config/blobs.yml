@@ -19,3 +19,7 @@ redis/redis-3.0.6.tar.gz:
   object_id: 9cf23ed6-4eaa-4fba-8c32-5bb3343ea182
   sha: 4b1c7b1201984bca8f7f9c6c58862f6928cf0a25
   size: 1372648
+debian_nfs_server/nfs-kernel-server_1%3a1.2.0-4ubuntu4.1_amd64.deb:
+  object_id: 04dd94b2-48dc-422d-9422-d423e439dcb1
+  sha: a44b3f8319984bace61f21bb6d15cee1419e5bf3
+  size: 169618
