@@ -23,3 +23,10 @@ properties:
   docker.registry.ssl.key:
     description: PEM-encoded private key for HTTPS registry operation
     default: ~
+
+  docker.cache.enabled:
+    description: Use a cache (Redis) to speed up certain retrieval operations
+    default: ~
+  docker.cache.host:
+    description: IP address of the cache host
+    default: localhost
