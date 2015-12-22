@@ -1,0 +1,28 @@
+#!/bin/bash
+
+set -e # exit immediately if a simple command exits with a non-zero status
+set -u # report the usage of uninitialized variables
+
+# Setup env vars and folders for the ctl script
+source /var/vcap/jobs/proxy/helpers/ctl_setup.sh 'proxy'
+
+export PORT=${PORT:-5000}
+export LANG=en_US.UTF-8
+
+case $1 in
+
+  start)
+    pid_guard $PIDFILE $JOB_NAME
+    nginx -c $JOB_DIR/config/nginx.conf
+    ;;
+
+  stop)
+    kill_and_wait $PIDFILE
+    ;;
+
+  *)
+    echo "Usage: ctl {start|stop}"
+    ;;
+
+esac
+exit 0

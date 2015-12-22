@@ -24,6 +24,10 @@ properties:
     description: PEM-encoded private key for HTTPS registry operation
     default: ~
 
+  docker.registry.cookie:
+    description: A secret cookie used to sign state against tampering.
+    default: ~
+
   docker.cache.enabled:
     description: Use a cache (Redis) to speed up certain retrieval operations
     default: ~

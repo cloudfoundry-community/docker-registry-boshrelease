@@ -1,0 +1,5 @@
+check process proxy
+  with pidfile /var/vcap/sys/run/proxy/proxy.pid
+  start program "/var/vcap/jobs/proxy/bin/monit_debugger proxy '/var/vcap/jobs/proxy/bin/ctl start'"
+  stop program "/var/vcap/jobs/proxy/bin/monit_debugger proxy '/var/vcap/jobs/proxy/bin/ctl stop'"
+  group vcap
