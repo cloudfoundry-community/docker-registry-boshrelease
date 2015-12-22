@@ -1,0 +1,58 @@
+---
+packages:
+- name: common
+  version: e401816a4748292163679fafcbd8f818ed8154a5
+  fingerprint: e401816a4748292163679fafcbd8f818ed8154a5
+  sha1: 16ce20c8c9c83fb783373ebb8e93df66d9a6aeb1
+  dependencies: []
+- name: debian_nfs_server
+  version: aac05f22582b2f9faa6840da056084ed15772594
+  fingerprint: aac05f22582b2f9faa6840da056084ed15772594
+  sha1: 9dd704cdcfcb5c92761c8fe63de9713631a4dcd5
+  dependencies: []
+- name: docker
+  version: be400ab57bd17be04cb3f890ee4fbcfafbc7c64b
+  fingerprint: be400ab57bd17be04cb3f890ee4fbcfafbc7c64b
+  sha1: 7f5a7f4bfb6c0836d58c07dc2fa6f09200e25e35
+  dependencies:
+  - golang
+- name: golang
+  version: d967027e1b56f667f2319f238fb3a11e995c8573
+  fingerprint: d967027e1b56f667f2319f238fb3a11e995c8573
+  sha1: 5cfa3ec90666326cbec120b1c02743bfc4d5689a
+  dependencies: []
+- name: nginx
+  version: ee8aa5431e12bd480b56831d2b3a3c71fbc74ac0
+  fingerprint: ee8aa5431e12bd480b56831d2b3a3c71fbc74ac0
+  sha1: 69602210de7c248fd1919438583bca80422b1357
+  dependencies: []
+- name: redis
+  version: 5f1b76ee2e79a58b94634cf2a59281ba7fc96241
+  fingerprint: 5f1b76ee2e79a58b94634cf2a59281ba7fc96241
+  sha1: c470c4a0447855f2b7f92e81de737310619e60f7
+  dependencies: []
+jobs:
+- name: cache
+  version: 856a02547d9b880f5c15f7d1692a721856db50c5
+  fingerprint: 856a02547d9b880f5c15f7d1692a721856db50c5
+  sha1: ab48d410d3ded16afcc72dd3a0a8c818450245d6
+- name: debian_nfs_server
+  version: ce9f9ef7e20f5fbe20be7355d70887cb8385db34
+  fingerprint: ce9f9ef7e20f5fbe20be7355d70887cb8385db34
+  sha1: 50f0d875bf584706674abb53a9ea85f4a268401e
+- name: nfs_mounter
+  version: 1997a368af154f846112476a2472aea3ec23cc6b
+  fingerprint: 1997a368af154f846112476a2472aea3ec23cc6b
+  sha1: d5eb2c8b6d9c8f9ea62919f99ab16aa70521feee
+- name: proxy
+  version: 506f17cf8ded2fb875aae2c2e039a4be9c133730
+  fingerprint: 506f17cf8ded2fb875aae2c2e039a4be9c133730
+  sha1: 2da2e81522e5cf15a5366e62e896cf91cf6b29c4
+- name: registry
+  version: 085d67c3d8307e2c4c28dd0f0b5edba07600f466
+  fingerprint: 085d67c3d8307e2c4c28dd0f0b5edba07600f466
+  sha1: 89b7c110b1991fd6ca00be2c78514ca385bb9e72
+commit_hash: f81c1765
+uncommitted_changes: true
+name: docker-registry
+version: '2'
