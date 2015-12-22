@@ -28,9 +28,10 @@ properties:
     description: A secret cookie used to sign state against tampering.
     default: ~
 
-  docker.cache.enabled:
-    description: Use a cache (Redis) to speed up certain retrieval operations
-    default: ~
+  docker.registry.root:
+    description: Path (on-disk, locally) where the Docker registry should store its data
+    default: /var/vcap/store/registry
+
   docker.cache.host:
     description: IP address of the cache host
-    default: localhost
+    default: ""
