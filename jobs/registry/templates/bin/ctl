@@ -17,7 +17,7 @@ case $1 in
     # store pid in $PIDFILE
     echo $$ > $PIDFILE
 
-    exec chpst -u vcap:vcap registry ${JOB_DIR}/config/registry.conf
+    exec chpst -u vcap:vcap registry ${JOB_DIR}/config/registry.conf \
          >>$LOG_DIR/$JOB_NAME.log 2>&1
 
     ;;
