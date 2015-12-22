@@ -14,11 +14,11 @@ packages:
 
 properties:
   nfs_server.address:
-    description: "NFS server for droplets and apps (not used in an AWS deploy, use s3 instead)"
+    description: "NFS server for droplets and apps"
   nfs_server.share:
-    description: "Path to share from the remote NFS server (not used in an AWS deploy, use s3 instead)"
+    description: "Path to share from the remote NFS server"
   nfs_server.nfsv4:
-    description: "bool to use NFS4 (not used in an AWS deploy, use s3 instead)"
+    description: "bool to use NFS4"
   nfs_server.idmapd_domain:
     description: "Domain name for NFS idmapd"
     default: "localdomain"
