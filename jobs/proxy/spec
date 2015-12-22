@@ -12,9 +12,12 @@ templates:
   tls/cert.pem: tls/cert.pem
   tls/key.pem: tls/key.pem
 properties:
-  docker.proxy.registries:
-    description: A list of the IP:PORT address of each Docker proxy to load-balance
+  docker.proxy.backend.hosts:
+    description: A list of the IP addresses of each Docker proxy to load-balance
     default: []
+  docker.proxy.backend.port:
+    description: TCP Port that each backend registry is listening on
+    default: 5000
 
   docker.proxy.ssl.cert:
     description: PEM-encoded SSL certificate for HTTPS proxy operation
