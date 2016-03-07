@@ -22,7 +22,7 @@ Usage
 To use this BOSH release, first upload it to your bosh:
 
 ```
-bosh upload release https://docker-registry-boshrelease.s3.amazonaws.com/boshrelease-docker-registry-1.tgz
+bosh upload release https://bosh.io/d/github.com/cloudfoundry-community/docker-registry-boshrelease
 ```
 
 To deploy it you will need the source repository that contains templates:
@@ -45,16 +45,6 @@ For developers of the release using [bosh-lite](https://github.com/cloudfoundry/
 templates/make_manifest warden
 bosh -n deploy
 ```
-
-### Storage backends
-
-By default, a persistent disk is used to store the pushed docker repositories. You can also configure to use AWS S3, OpenStack Swift or Glance, and Google Compute.
-
-See the job spec for the configuration to pass through:
-
-- [AWS S3](https://github.com/cloudfoundry-community/docker-registry-boshrelease/blob/master/jobs/docker_registry/spec#L35-L46)
-- [Swift](https://github.com/cloudfoundry-community/docker-registry-boshrelease/blob/master/jobs/docker_registry/spec#L48-L59)
-- [Google Compute](https://github.com/cloudfoundry-community/docker-registry-boshrelease/blob/master/jobs/docker_registry/spec#L61-L67)
 
 ### Override security groups
 
