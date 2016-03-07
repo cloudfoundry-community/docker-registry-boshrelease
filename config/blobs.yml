@@ -1,8 +1,4 @@
 ---
-docker/distribution-2.2.1.tar.gz:
-  object_id: f550c923-0e8f-4478-9874-127f723575ca
-  sha: 366f9c452beaa49aa82f232e49daae190f530ca2
-  size: 4973939
 golang/go1.5.2.linux-amd64.tar.gz:
   object_id: 1e6ead36-3d22-4f36-8d16-492d9957ce1a
   sha: cae87ed095e8d94a81871281d35da7829bd1234e
@@ -23,3 +19,7 @@ debian_nfs_server/nfs-kernel-server_1%3a1.2.0-4ubuntu4.1_amd64.deb:
   object_id: 04dd94b2-48dc-422d-9422-d423e439dcb1
   sha: a44b3f8319984bace61f21bb6d15cee1419e5bf3
   size: 169618
+docker/distribution-2.3.0.tar.gz:
+  object_id: c35caa0d-d2ea-497c-a6ff-9eae95ac6eac
+  sha: d0313dbcd9997bc9555b59ac516e6204c80bf635
+  size: 4984679
