@@ -13,12 +13,13 @@ export HOME=/var/vcap
 #       github page: https://github.com/docker/distribution/releases
 #
 
+VERSION=2.3.0
 REPO_NAME=github.com/docker/distribution
 REPO_DIR=${BOSH_INSTALL_TARGET}/src/${REPO_NAME}
 
-tar xzf docker/distribution-2.2.1.tar.gz
+tar xzf docker/distribution-${VERSION}.tar.gz
 mkdir -p $(dirname $REPO_DIR)
-mv distribution-2.2.1 $REPO_DIR
+mv distribution-${VERSION} $REPO_DIR
 
 export GOROOT=$(readlink -nf /var/vcap/packages/golang)
 export GOPATH=$BOSH_INSTALL_TARGET:${REPO_DIR}/Godeps/_workspace
