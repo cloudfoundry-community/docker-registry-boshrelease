@@ -1,0 +1,24 @@
+---
+meta:
+  environment: NAME
+  floating_ip: FLOATING_IP
+
+director_uuid: PLACEHOLDER-DIRECTOR-UUID
+
+properties: {}
+
+networks:
+- name: default
+  type: manual
+  subnets:
+  - range: 10.0.0.0/24
+    gateway: 10.0.0.1
+    dns: [10.0.0.2]
+    reserved: ["10.0.0.2 - 10.0.0.10"]
+    cloud_properties:
+      subnet: NET-ID
+      security_groups: [bosh, docker-registry]
+
+- name: elastic
+  type: vip
+  cloud_properties: {}

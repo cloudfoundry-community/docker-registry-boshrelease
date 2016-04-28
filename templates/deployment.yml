@@ -13,7 +13,7 @@ jobs:     (( param "No jobs defined" ))
 
 compilation:
   workers: 6
-  network: docker_registry1
+  network: (( grab networks.default.name ))
   reuse_compilation_vms: true
   cloud_properties: (( param "Cloud properties must be specified by the infrastructure templates" ))
 

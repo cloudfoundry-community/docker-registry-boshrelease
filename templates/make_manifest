@@ -28,14 +28,14 @@ if [[ $DIRECTOR_NAME = "warden" ]]; then
 fi
 
 if [[ $infrastructure = "aws-ec2" ]]; then
-  if [[ $DIRECTOR_CPI != "aws" ]]; then
+  if [[ $DIRECTOR_CPI != "aws_cpi" ]]; then
     echo "Not targeting an AWS BOSH. Please use 'bosh target' before running this script."
     exit 1
   fi
 fi
 
 if [[ $infrastructure = "openstack" ]]; then
-  if [[ $DIRECTOR_CPI != "openstack" ]]; then
+  if [[ $DIRECTOR_CPI != "openstack_cpi" ]]; then
     echo "Not targeting an Openstack BOSH. Please use 'bosh target' before running this script."
     exit 1
   fi
@@ -46,7 +46,7 @@ release=$templates/..
 tmpdir=$release/tmp
 
 mkdir -p $tmpdir
-cp $templates/stub.yml $tmpdir/stub-with-uuid.yml
+cp $templates/stub.${infrastructure}.yml $tmpdir/stub-with-uuid.yml
 echo $DIRECTOR_NAME $DIRECTOR_CPI $DIRECTOR_UUID
 perl -pi -e "s/PLACEHOLDER-DIRECTOR-UUID/$DIRECTOR_UUID/g" $tmpdir/stub-with-uuid.yml
 perl -pi -e "s/NAME/$NAME/g" $tmpdir/stub-with-uuid.yml

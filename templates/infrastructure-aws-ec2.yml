@@ -1,32 +1,28 @@
----
 meta:
-  security_groups: (( param "You must define security groups for your AWS deployment" ))
-  network_name:    (( param "You must define a network name for your AWS deployment" ))
-
   stemcell:
-    name: bosh-aws-xen-ubuntu
+    name: bosh-aws-xen-hvm-ubuntu-trusty-go_agent
     version: latest
 
 jobs:
   - name: registry
     instances: 1
     networks:
-      - name: (( grab meta.network_name ))
+      - name: (( grab networks.default.name ))
+        default:
+          - dns
+          - gateway
+      - name: elastic
+        static_ips: (( grab meta.floating_ip ))
 
 compilation:
   cloud_properties:
-    instance_type: m1.small
+    instance_type: t2.small
+
+disk_pools:
+- name: registry
+  disk_size: 102400
 
 resource_pools:
   - name: small_z1
     cloud_properties:
-      instance_type: m1.small
-
-networks:
-  - name: floating
-    type: vip
-    cloud_properties: {}
-  - name: (( grab meta.network_name ))
-    type: dynamic
-    cloud_properties:
-      security_groups: (( grab meta.security_groups ))
+      instance_type: t2.small

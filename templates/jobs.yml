@@ -1,4 +1,8 @@
 ---
+releases:
+  - name: docker-registry
+    version: latest
+
 update:
   canaries: 1
   max_in_flight: 50
@@ -12,6 +16,7 @@ jobs:
       - { release: docker-registry, name: registry }
       - { release: docker-registry, name: proxy }
     instances: 1
+    persistent_disk_pool: registry
     resource_pool: small_z1
     properties:
       docker:
