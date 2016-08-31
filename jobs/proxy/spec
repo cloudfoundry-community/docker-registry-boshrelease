@@ -1,7 +1,11 @@
 ---
 name: proxy
+
+description: "Nginx provides proxy and auth functionalities for Docker Registry"
+
 packages:
   - nginx
+
 templates:
   bin/ctl: bin/ctl
   bin/monit_debugger: bin/monit_debugger
@@ -11,14 +15,34 @@ templates:
   helpers/ctl_utils.sh: helpers/ctl_utils.sh
   tls/cert.pem: tls/cert.pem
   tls/key.pem: tls/key.pem
+
 properties:
+  docker.proxy.loglevel:
+    description: Error loglevel
+    default: error
+  docker.proxy.worker_processes:
+    description: Number of worker processes
+    default: auto
+  docker.proxy.worker_priority:
+    description: Priority of the worker processes
+    default: 0
+  docker.proxy.keepalive_timeout:
+    description: Time to keep a keep-alive connection open
+    default: 75s
+  docker.proxy.keepalive_timeout_header:
+    description: Show Keep-alive header
+    default: 20s
   docker.proxy.backend.hosts:
     description: A list of the IP addresses of each Docker proxy to load-balance
-    default: []
+    default: ["127.0.0.1"]
   docker.proxy.backend.port:
     description: TCP Port that each backend registry is listening on
     default: 5000
-
+  docker.proxy.address:
+    description: IP address where to listen for incoming connections. (For all interfaces, do not use 0.0.0.0, use *)
+    default: "*"
+  docker.proxy.port:
+    description: Port to listen to for incoming connections. Defaults to 443 if ssl, otherwise 80
   docker.proxy.ssl.cert:
     description: PEM-encoded SSL certificate for HTTPS proxy operation
     default: ~
