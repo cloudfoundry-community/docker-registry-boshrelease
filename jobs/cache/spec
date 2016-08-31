@@ -1,7 +1,11 @@
 ---
 name: cache
+
+description: "Redis provides caching features for Docker Registry"
+
 packages:
   - redis
+
 templates:
   bin/ctl: bin/ctl
   bin/monit_debugger: bin/monit_debugger
@@ -9,7 +13,32 @@ templates:
   data/properties.sh.erb: data/properties.sh
   helpers/ctl_setup.sh: helpers/ctl_setup.sh
   helpers/ctl_utils.sh: helpers/ctl_utils.sh
+
 properties:
+  docker.cache.redis.bind:
+    description: IP Address to bind the Redis server to
+    default: "127.0.0.1"
+  docker.cache.redis.port:
+    description: What port to run Redis server on
+    default: 6379
+  docker.cache.redis.timeout:
+    description: Close the connection after a client is idle for N seconds (0 to disable)
+    default: 30
+  docker.cache.redis.tcp_keepalive:
+    description: TCP keepalive. If non-zero, use SO_KEEPALIVE to send TCP ACKs to clients if no communication
+    default: 60
   docker.cache.redis.loglevel:
     description: Log verbosity level for Redis cache server
     default: warning
+  docker.cache.redis.password:
+    description: Require clients to issue AUTH <PASSWORD> before processing any command
+    example: "mypasswordredis"
+  docker.cache.redis.maxclients:
+    description: Set the max number of connected clients at the same time
+    default: 10000
+  docker.cache.redis.maxmemory:
+    description: Don't use more memory than the specified amount of bytes.
+    example: 1000000000000
+  docker.cache.redis.databases:
+    description: Set the number of redis databases.
+    default: 16
