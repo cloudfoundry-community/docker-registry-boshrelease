@@ -6,23 +6,26 @@ set -u # report the usage of uninitialized variables
 # Setup env vars and folders for the ctl script
 source /var/vcap/jobs/proxy/helpers/ctl_setup.sh 'proxy'
 
-export PORT=${PORT:-5000}
 export LANG=en_US.UTF-8
 
 case $1 in
-
   start)
     pid_guard $PIDFILE $JOB_NAME
-    nginx -c $JOB_DIR/config/nginx.conf
+    exec $JOB_DIR/packages/nginx/sbin/nginx \
+      -c $JOB_DIR/config/nginx.conf \
+      >>$LOG_DIR/nginx.stdout.log \
+      2>>$LOG_DIR/nginx.stderr.log
     ;;
-
   stop)
+    kill -QUIT $(head -1 $PIDFILE)
+    sleep 5
     kill_and_wait $PIDFILE
     ;;
-
-  *)
-    echo "Usage: ctl {start|stop}"
+  reload)
+    kill -HUP $(head -1 $PIDFILE)
     ;;
-
+  *)
+    echo "Usage: ctl {start|stop|reload}"
+    ;;
 esac
 exit 0
