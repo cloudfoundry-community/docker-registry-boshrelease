@@ -1,8 +1,12 @@
 ---
 name: registry
+
+description: "Docker Registry v2 API"
+
 packages:
 - golang
 - docker
+
 templates:
   bin/ctl: bin/ctl
   bin/monit_debugger: bin/monit_debugger
@@ -12,11 +16,26 @@ templates:
   helpers/ctl_utils.sh: helpers/ctl_utils.sh
   tls/cert.pem: tls/cert.pem
   tls/key.pem: tls/key.pem
+
 properties:
+  docker.registry.bind:
+      description: What address to bind the Docker Registry v2 API
   docker.registry.port:
     description: What port to run the Docker Registry v2 API on
     default: 5000
+  docker.registry.loglevel:
+      description: Sets the sensitivity of logging output. Permitted values are error, warn, info and debug
+      default: info
+  docker.registry.endpoint:
+    description: Externally-reachable address for the registry, as a fully qualified URL. If present, it is used when creating generated URLs. Otherwise, these URLs are derived from client requests
+    example: "https://myregistryaddress.org:5000"
+  docker.registry.debug:
+    description: Debug endpoint can be used for monitoring registry metrics and health, as well as profiling
+    example: "localhost:5001"
 
+  docker.registry.cookie:
+    description: A secret cookie used to sign state against tampering.
+    default: ~
   docker.registry.ssl.cert:
     description: PEM-encoded SSL certificate for HTTPS registry operation
     default: ~
@@ -24,14 +43,63 @@ properties:
     description: PEM-encoded private key for HTTPS registry operation
     default: ~
 
-  docker.registry.cookie:
-    description: A secret cookie used to sign state against tampering.
-    default: ~
-
+  docker.registry.storage:
+    description: Defines which storage backend is in use, otherwise filesystem backend will be used
+    example:
+      s3:
+        accesskey: awsaccesskey
+        secretkey: awssecretkey
+        region: us-west-1
+        regionendpoint: http://myobjects.local
+        bucket: bucketname
+        encrypt: true
+        keyid: mykeyid
+        secure: true
+        v4auth: true
+        chunksize: 5242880
+        rootdirectory: /s3/object/name/prefix
   docker.registry.root:
-    description: Path (on-disk, locally) where the Docker registry should store its data
+    description: Path (on-disk, locally) where the Docker registry should store its data (filesystem storage backend)
     default: /var/vcap/store/registry
+  docker.registry.storage_delete:
+    description: Enable the deletion of image blobs and manifests by digest
+    default: false
+  docker.registry.storage_maintenance:
+    description: Maintenance jobs for storage, upload purging and read-only mode are the only functions available
+    default:
+      uploadpurging:
+        enabled: true
+        age: 168h
+        interval: 24h
+        dryrun: false
+      readonly:
+        enabled: false
+
+  docker.mirror.host:
+    description: Enables a registry to be configured as a pull through cache to the official Docker Hub. See mirror for more information
+    example: https://registry-1.docker.io
+  docker.mirror.username:
+    description: Docker registry username
+  docker.mirror.password:
+    description: Docker registry password
 
   docker.cache.host:
-    description: IP address of the cache host
-    default: ""
+    description: IP address of the redis cache host
+  docker.cache.port:
+    description: Port address of the cache host
+    default: 6379
+  docker.cache.password:
+    description: Password to access the cache host
+  docker.cache.pool:
+    description: Configure the behavior of the Redis connection pool.
+    default:
+      maxidle: 16
+      maxactive: 64
+      idletimeout: 300s
+
+  docker.registry.reporting:
+    description: Configures error and metrics reporting tools. At the moment only two services are supported, New Relic and Bugsnag
+    example:
+      newrelic:
+        licensekey: newreliclicensekey
+        name: newrelicname
