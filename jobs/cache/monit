@@ -1,5 +1,5 @@
 check process cache
-  with pidfile /var/vcap/sys/run/cache/cache.pid
+  with pidfile /var/vcap/sys/run/cache/redis.pid
   start program "/var/vcap/jobs/cache/bin/monit_debugger cache '/var/vcap/jobs/cache/bin/ctl start'"
   stop program "/var/vcap/jobs/cache/bin/monit_debugger cache '/var/vcap/jobs/cache/bin/ctl stop'"
   group vcap
