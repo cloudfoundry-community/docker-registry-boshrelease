@@ -12,6 +12,8 @@ case $1 in
   start)
     pid_guard $PIDFILE $JOB_NAME
     prep_system
+    # Set limitations on system resources
+    ulimit -n $JOB_ULIMIT_FILES
     exec chpst -u vcap:vcap redis-server \
       $JOB_DIR/config/redis.conf \
       >>$LOG_DIR/$JOB_NAME.stdout.log \
