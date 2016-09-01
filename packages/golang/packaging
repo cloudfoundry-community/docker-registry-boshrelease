@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 set -e # exit immediately if a simple command exits with a non-zero status
 set -u # report the usage of uninitialized variables
 
@@ -12,6 +14,8 @@ export HOME=/var/vcap
 # NOTE: new versions of golang can be found on the official
 #       download page: https://golang.org/dl
 #
+echo "Extracting go ... "
+tar xzf golang/go1.7.linux-amd64.tar.gz
 
-tar xzf golang/go1.5.2.linux-amd64.tar.gz
+echo "Installing go ..."
 cp -R go/* ${BOSH_INSTALL_TARGET}
