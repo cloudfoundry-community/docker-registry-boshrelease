@@ -10,6 +10,7 @@ templates:
   bin/ctl: bin/ctl
   bin/monit_debugger: bin/monit_debugger
   config/nginx.conf: config/nginx.conf
+  config/auth/registry.erb: config/auth/registry
   data/properties.sh.erb: data/properties.sh
   helpers/ctl_setup.sh: helpers/ctl_setup.sh
   helpers/ctl_utils.sh: helpers/ctl_utils.sh
@@ -49,3 +50,8 @@ properties:
   docker.proxy.ssl.key:
     description: PEM-encoded private key for HTTPS proxy operation
     default: ~
+  docker.proxy.auth_basic:
+    description: If defined, it will enable Auth Basic authentication in the proxy
+    example:
+      user: "{PLAIN}password"
+      user2: "$(openssl passwd -crypt PASSWORD)"
