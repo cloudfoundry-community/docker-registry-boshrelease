@@ -32,6 +32,9 @@ properties:
   docker.registry.debug:
     description: Debug endpoint can be used for monitoring registry metrics and health, as well as profiling
     example: "localhost:5001"
+  docker.registry.ofiles:
+    description: Open files (ulimit)
+    default: 10000
 
   docker.registry.cookie:
     description: A secret cookie used to sign state against tampering.

@@ -11,12 +11,17 @@ export LANG=en_US.UTF-8
 case $1 in
   start)
     pid_guard $PIDFILE $JOB_NAME
-    # store pid in $PIDFILE
-    echo $$ > $PIDFILE
-    exec chpst -u vcap:vcap registry \
-      ${JOB_DIR}/config/registry.conf \
-      >>$LOG_DIR/$JOB_NAME.stdout.log \
-      2>>$LOG_DIR/$JOB_NAME.stderr.log
+    (
+        {
+            # Set limitations on system resources
+            ulimit -n $JOB_ULIMIT_FILES
+            exec chpst -u vcap:vcap registry serve \
+                ${JOB_DIR}/config/registry.conf
+        } \
+        >>$LOG_DIR/$JOB_NAME.stdout.log \
+        2>>$LOG_DIR/$JOB_NAME.stderr.log
+    ) &
+    echo $! > $PIDFILE
     ;;
   stop)
     kill_and_wait $PIDFILE
