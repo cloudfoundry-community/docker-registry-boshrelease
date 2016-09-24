@@ -18,8 +18,7 @@ case $1 in
             exec chpst -u vcap:vcap registry serve \
                 ${JOB_DIR}/config/registry.conf
         } \
-        >>$LOG_DIR/$JOB_NAME.stdout.log \
-        2>>$LOG_DIR/$JOB_NAME.stderr.log
+        >>$LOG_DIR/$JOB_NAME.log 2>&1
     ) &
     echo $! > $PIDFILE
     ;;
