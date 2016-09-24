@@ -8,3 +8,5 @@ export NAME='<%= name %>'
 export JOB_INDEX=<%= index %>
 # full job name, like cache/0 or webapp/3
 export JOB_FULL="$NAME/$JOB_INDEX"
+
+export JOB_ULIMIT_FILES=$(expr <%= p('docker.cache.redis.maxclients') %> + 32)

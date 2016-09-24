@@ -1,0 +1,3 @@
+<% if_p("docker.proxy.auth_basic") do |auth| %><% auth.each do |user, password| %><%= user %>:<%= password %>
+<% end %>
+<% end %>

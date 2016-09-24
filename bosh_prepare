@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+
+SRC=$(pwd)/blobs
+SHELL=/bin/bash
+AWK=awk
+
+read_spec() {
+    local spec="$1"
+    $AWK '/^files:/ {
+        while (getline) {
+            if ($1 == "-") {
+                if ($3 ~ /#/) {
+                    url=$3$4;
+                    sub(/#/, "", url)
+                    print $2"@"url;
+                }
+            } else {
+                next;
+            }
+        }
+    }' "$spec"
+}
+
+exec_download() {
+    local output="$1"
+    local url="$2"
+    local package=$(dirname "${output}")
+    local src=$(basename "${output}")
+    (
+        cd ${SRC}
+        if [ ! -s "${output}" ]; then
+            echo "* Downloading ${url} ..."
+            mkdir -p "${package}"
+            curl -L -s "${url}" -o "${output}"
+        fi
+    )
+}
+
+exec_prepare() {
+    local prepare="$1"
+    (
+        cd ${SRC}
+        ${SHELL} "${prepare}"
+    )
+}
+
+main() {
+    for script in $(pwd)/packages/*/spec ; do
+        local base=$(dirname "${script}")
+        local prepare="${base}/prepare"
+        if [ -s "${prepare}" ]; then
+            echo "* Procesing ${prepare} ..."
+            exec_prepare "$prepare"
+        else
+            echo "* Procesing ${script} ..."
+            for spec in $(read_spec "${script}"); do
+                local downloadfile=$(echo $spec | cut -d'@' -f 1)
+                local downloadurl=$(echo $spec | cut -d'@' -f 2)
+                exec_download "${downloadfile}" "${downloadurl}"
+            done
+        fi
+    done
+}
+
+# Run!
+mkdir -p $SRC
+main

@@ -1,6 +1,9 @@
 ---
 name: nginx
-dependencies: []
+
 files:
-  - nginx/nginx-1.8.0.tar.gz
-  - nginx/pcre-8.38.tar.gz
+  - nginx/pcre-8.39.tar.gz                            # ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.39.tar.gz
+  - nginx/headers-more-nginx-module-0.30.tar.gz       # https://github.com/openresty/headers-more-nginx-module/archive/v0.30.tar.gz
+  - nginx/openssl-1.0.2h.tar.gz                       # http://openssl.org/source/openssl-1.0.2h.tar.gz
+  - nginx/zlib-1.2.8.tar.gz                           # http://zlib.net/zlib-1.2.8.tar.gz
+  - nginx/nginx-1.10.1.tar.gz                     # http://nginx.org/download/nginx-1.10.1.tar.gz

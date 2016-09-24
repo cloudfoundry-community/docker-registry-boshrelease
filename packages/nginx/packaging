@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 set -e # exit immediately if a simple command exits with a non-zero status
 set -u # report the usage of uninitialized variables
 
@@ -16,13 +18,38 @@ export HOME=/var/vcap
 #       ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/
 #
 
-tar xzf nginx/pcre-8.38.tar.gz
-tar xzf nginx/nginx-1.8.0.tar.gz
-(cd nginx-1.8.0
- ./configure \
-   --user=vcap --group=vcap \
-   --prefix=${BOSH_INSTALL_TARGET} \
-   --with-pcre=../pcre-8.38 \
-   --with-pcre-jit \
-   --with-http_ssl_module
- make -j $CPUS install)
+echo "Extracting zlib ... "
+tar xzvf nginx/zlib-1.2.8.tar.gz
+export ZLIB_SRC=${BOSH_COMPILE_TARGET}/zlib-1.2.8
+
+echo "Extracting openssl ... "
+tar xvf nginx/openssl-1.0.2h.tar.gz
+export OPENSSL_SRC=${BOSH_COMPILE_TARGET}/openssl-1.0.2h
+
+echo "Extracting pcre..."
+tar xzvf nginx/pcre-8.39.tar.gz
+
+echo "Extracting headers-more module..."
+tar xzvf nginx/headers-more-nginx-module-0.30.tar.gz
+
+echo "Extracting nginx..."
+tar xzvf nginx/nginx-1.10.1.tar.gz
+
+echo "Building nginx..."
+export OPENSSL_LIB=/var/vcap/packages/nginx/lib
+export ZLIB_LIB=/var/vcap/packages/nginx/lib
+
+pushd nginx-1.10.1
+    ./configure \
+    --user=vcap --group=vcap \
+    --prefix=${BOSH_INSTALL_TARGET} \
+    --with-ld-opt="-Wl,-rpath,$OPENSSL_LIB,-rpath,$ZLIB_LIB" \
+    --with-pcre=../pcre-8.39 \
+    --with-pcre-jit \
+    --with-zlib=${ZLIB_SRC} \
+    --with-openssl=${OPENSSL_SRC} \
+    --add-module=../headers-more-nginx-module-0.30 \
+    --with-http_realip_module \
+    --with-http_ssl_module
+    make -j $CPUS install
+popd
