@@ -10,28 +10,25 @@ CPUS=$(grep -c ^processor /proc/cpuinfo)
 # $BOSH_INSTALL_TARGET - where you copy/install files to be included in package
 export HOME=/var/vcap
 
-#
-# NOTE: new versions of nginx can be found on the official
-#       download page: http://nginx.org/en/download.html
-#
-#       You can download PCRE from its FTP site:
-#       ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/
-#
-
+# from http://zlib.net/zlib-1.2.8.tar.gz
 echo "Extracting zlib ... "
 tar xzvf nginx/zlib-1.2.8.tar.gz
 export ZLIB_SRC=${BOSH_COMPILE_TARGET}/zlib-1.2.8
 
+# from https://www.openssl.org/source/openssl-1.0.2h.tar.gz
 echo "Extracting openssl ... "
 tar xvf nginx/openssl-1.0.2h.tar.gz
 export OPENSSL_SRC=${BOSH_COMPILE_TARGET}/openssl-1.0.2h
 
+# from ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.39.tar.gz
 echo "Extracting pcre..."
 tar xzvf nginx/pcre-8.39.tar.gz
 
+# from https://github.com/openresty/headers-more-nginx-module/archive/v0.30.tar.gz
 echo "Extracting headers-more module..."
 tar xzvf nginx/headers-more-nginx-module-0.30.tar.gz
 
+# from http://nginx.org/download/nginx-1.10.1.tar.gz
 echo "Extracting nginx..."
 tar xzvf nginx/nginx-1.10.1.tar.gz
 

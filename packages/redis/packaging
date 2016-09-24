@@ -15,6 +15,7 @@ export HOME=/var/vcap
 #       download page: http://redis.io/download
 #
 
+# from http://download.redis.io/releases/redis-3.2.3.tar.gz
 echo "Extracting redis server ..."
 tar xzf redis/redis-3.2.3.tar.gz
 
