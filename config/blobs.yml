@@ -1,25 +1,37 @@
 ---
-golang/go1.5.2.linux-amd64.tar.gz:
-  object_id: 1e6ead36-3d22-4f36-8d16-492d9957ce1a
-  sha: cae87ed095e8d94a81871281d35da7829bd1234e
-  size: 76350075
-nginx/nginx-1.8.0.tar.gz:
-  object_id: 5354f750-b4b8-45a2-98e5-31f4622600fa
-  sha: 12bad312764feae50246685ab2e74512d1aa9b2f
-  size: 832104
-nginx/pcre-8.38.tar.gz:
-  object_id: 3551ba74-5b10-42ae-ad4a-72a2f15b0d0b
-  sha: 3ab418d0026c2a4e693ec783bd60660debc32b8f
-  size: 2053336
-redis/redis-3.0.6.tar.gz:
-  object_id: 9cf23ed6-4eaa-4fba-8c32-5bb3343ea182
-  sha: 4b1c7b1201984bca8f7f9c6c58862f6928cf0a25
-  size: 1372648
 debian_nfs_server/nfs-kernel-server_1%3a1.2.0-4ubuntu4.1_amd64.deb:
   object_id: 04dd94b2-48dc-422d-9422-d423e439dcb1
   sha: a44b3f8319984bace61f21bb6d15cee1419e5bf3
   size: 169618
-docker/distribution-2.3.0.tar.gz:
-  object_id: c35caa0d-d2ea-497c-a6ff-9eae95ac6eac
-  sha: d0313dbcd9997bc9555b59ac516e6204c80bf635
-  size: 4984679
+docker/distribution-2.5.0.tar.gz:
+  object_id: 04310d75-fad1-4513-aa6e-7a0b6267d2b1
+  sha: 98e7d1ab8f2433d301240ee3d775cb8d7de45cd2
+  size: 1619051
+golang/go1.7.linux-amd64.tar.gz:
+  object_id: a71c5891-e983-41f5-a6f4-d40941f31149
+  sha: a744e29da97fc3aadad1ee0d7d89b0d899645e50
+  size: 81573766
+nginx/headers-more-nginx-module-0.30.tar.gz:
+  object_id: 7f2480e6-f23f-4cb6-85ff-6343ec3259f0
+  sha: a188a399f3e365a0831585a9d7aa0e6ed1a75f0d
+  size: 27793
+nginx/nginx-1.10.1.tar.gz:
+  object_id: ae66cab4-368b-4427-bb12-ee1e5e7a90f3
+  sha: 9c5d4e06d309bbe2efa41f09dd53912e3c3d3a75
+  size: 909077
+nginx/openssl-1.0.2h.tar.gz:
+  object_id: ed8de978-80d8-4946-adda-5db9cee8cf47
+  sha: 577585f5f5d299c44dd3c993d3c0ac7a219e4949
+  size: 5274412
+nginx/pcre-8.39.tar.gz:
+  object_id: 3c994942-80e4-4d62-ace3-62635d94fde7
+  sha: b3aec1f643d9701841e2f9d57ac121a7ff448fc8
+  size: 2062258
+nginx/zlib-1.2.8.tar.gz:
+  object_id: 51d5b062-3987-42b6-a92d-d53a192b60be
+  sha: a4d316c404ff54ca545ea71a27af7dbc29817088
+  size: 571091
+redis/redis-3.2.3.tar.gz:
+  object_id: 05dac19f-f35f-46ae-8ead-46de06d00e7c
+  sha: 92d6d93ef2efc91e595c8bf578bf72baff397507
+  size: 1541401
