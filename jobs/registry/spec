@@ -1,11 +1,9 @@
 ---
 name: registry
-
 description: "Docker Registry v2 API"
-
 packages:
 - golang
-- docker
+- distribution
 
 templates:
   bin/ctl: bin/ctl

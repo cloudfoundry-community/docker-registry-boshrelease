@@ -1,0 +1,6 @@
+---
+name: distribution
+dependencies:
+- golang
+files:
+- docker/distribution-2.5.0.tar.gz
