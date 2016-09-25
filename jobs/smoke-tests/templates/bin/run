@@ -1,0 +1,147 @@
+#!/bin/bash
+set -eu
+export PATH=$PATH:/var/vcap/packages/docker/bin
+export PATH=$PATH:/var/vcap/packages/docker/sbin
+
+<%
+  scheme = ''
+  port   = 0
+  ssl    = 'off'
+
+  if p('docker.smoke-tests.ssl.enabled')
+    scheme = 'https'
+    port   = '443'
+
+    if p('docker.smoke-tests.ssl.verify')
+      ssl = 'verify'
+    else
+      ssl = 'noverify'
+    end
+  else
+    scheme = 'http'
+    port   = '80'
+  end
+  port = p('docker.smoke-tests.registry.port', port)
+
+%>
+
+CURL=curl
+DOCKER_OPTS=
+CHECKSSL=<%= ssl %>
+REGISTRY=<%= p('docker.smoke-tests.registry.ip') %>
+REGISTRY_URL=<%= scheme %>://${REGISTRY}:<%= port %>
+UPSTREAM=<%= p('docker.smoke-tests.image') %>
+RETAGGED=<%= p('docker.smoke-tests.retag') %>
+
+echo ">> Starting Docker Registry Smoke Tests"
+echo
+echo "   Testing registry at ${REGISTRY}"
+echo "   (URL ${REGISTRY_URL})"
+echo
+echo "   Smoke Tests will be performed by pulling"
+echo "   the '${UPSTREAM}' image fro Dockerhub,"
+echo "   and pushing it to ${UPSTREAM}:${RETAGGED}"
+echo "   on the new registry."
+echo
+case $CHECKSSL in
+(off)
+  echo "   SSL is NOT IN play"
+  DOCKER_OPTS="--insecure-registry=${REGISTRY}"
+  ;;
+(verify)
+  echo "   SSL is in play, and WILL be tested"
+  ;;
+(noverify)
+  echo "   SSL is in play, but will NOT be tested"
+  CURL="${CURL} -k"
+  DOCKER_OPTS="--insecure-registry=${REGISTRY}"
+  ;;
+esac
+echo
+
+bail() {
+  echo >&2 $*
+  exit 1
+}
+
+echo
+echo ">> Preparing..."
+echo "   - Setting up cgroups mountpoint(s)"
+if grep -v '^#' /etc/fstab | grep -q cgroup || [ ! -e /proc/cgroups ] || [ ! -d /sys/fs/cgroup ]; then
+  mkdir -p /sys/fs/cgroup
+fi
+if ! mountpoint -q /sys/fs/cgroup; then
+  mount -t tmpfs -o uid=0,gid=0,mode=0755 cgroup /sys/fs/cgroup
+fi
+(cd /sys/fs/cgroup
+ for sys in $(awk '!/^#/ { if ($4 == 1) print $1 }' /proc/cgroups); do
+   mkdir -p $sys
+   if ! mountpoint -q $sys; then
+     if ! mount -n -t cgroup -o $sys cgroup $sys; then
+       rmdir $sys || true
+     fi
+   fi
+ done)
+
+echo "   - Starting docker daemon"
+docker daemon ${DOCKER_OPTS} >/dev/null 2>&1 &
+while [[ ! -e /var/run/docker.sock ]]; do
+  sleep 1
+done
+
+echo
+echo
+echo ">> Beginning tests in earnest"
+echo "   - Pull ${UPSTREAM} image from Dockerhub"
+docker pull ${UPSTREAM} 2>&1 | sed -e 's/^/       /' || \
+  bail "failed to pull ${UPSTREAM} from Dockerhub!"
+
+echo
+echo "   - Retag ${UPSTREAM} as ${REGISTRY}/${UPSTREAM}:${RETAGGED}"
+docker tag  ${UPSTREAM} ${REGISTRY}/${UPSTREAM}:${RETAGGED} 2>&1 | sed -e 's/^/       /' || \
+  bail "failed to tag ${UPSTREAM} as ${REGISTRY}/${UPSTREAM}:${RETAGGED}"
+
+echo
+echo "   - Push ${REGISTRY}/${UPSTREAM}:${RETAGGED} to ${REGISTRY_URL}"
+docker push ${REGISTRY}/${UPSTREAM}:${RETAGGED} 2>&1 | sed -e 's/^/       /' || \
+  bail "failed to push ${REGISTRY}/${UPSTREAM}:${RETAGGED} to ${REGISTRY_URL}"
+
+echo
+echo "   - Removing local images"
+docker rmi  ${UPSTREAM} | sed -e 's/^/       /'
+docker rmi  ${REGISTRY}/${UPSTREAM}:${RETAGGED} 2>&1 | sed -e 's/^/       /'
+
+echo
+echo -n "   - Check that our local copies are indeed gone... "
+if [[ -n $(docker images | grep ${RETAGGED}) ]]; then
+	echo "FAILED!"
+	(echo "+ docker images"
+	 docker images) 2>&1 | sed -e 's/^/       /'
+	exit 1
+fi
+
+echo
+echo "   - Pull ${UPSTREAM}:${RETAGGED} image from ${REGISTRY}"
+docker pull ${REGISTRY}/${UPSTREAM}:${RETAGGED} 2>&1 | sed -e 's/^/       /'
+
+echo
+echo -n "   - Check that registry had our tag.... "
+if [[ -z $(docker images | grep ${RETAGGED}) ]]; then
+	echo "FAILED!"
+	(echo "+ docker images"
+	 docker images) 2>&1 | sed -e 's/^/       /'
+	exit 1
+fi
+
+echo
+echo -n "   - Cleaning up remote images"
+DIGEST=$(${CURL} -siL ${REGISTRY_URL}/v2/${UPSTREAM}/manifests/${RETAGGED} \
+              -H "Accept: application/vnd.docker.distribution.manifest.v2+json" | \
+           grep 'Docker-Content-Digest:' | awk '{print $2}' | tr -d '\r')
+${CURL} -sL -X DELETE ${REGISTRY_URL}/v2/${UPSTREAM}/manifests/${DIGEST} 2>&1 | sed -e 's/^/       /'
+
+echo
+echo
+echo
+echo "SUCCESS!"
+exit 0

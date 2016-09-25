@@ -20,6 +20,8 @@ jobs:
     resource_pool: small_z1
     properties:
       docker:
+        registry:
+          storage_delete: true
         proxy:
           backend:
             hosts: [127.0.0.1]
@@ -78,3 +80,18 @@ jobs:
               B9f/jV291iU/978Rz22zIN9Y48s2hmu/Skou0+/jFTuBZDeJrWEAd9wxFr9ZGYW2
               JObPWXF5f5F8UTGjZJT6fnduEg==
               -----END PRIVATE KEY-----
+
+  - name: smoke-tests
+    instances: 1
+    lifecycle: errand
+    templates:
+      - { release: docker-registry, name: smoke-tests }
+    resource_pool: small_z1
+    properties:
+      docker:
+        smoke-tests:
+          registry:
+            ip: (( grab jobs.registry.networks[0].static_ips[0] ))
+          ssl:
+            enabled: true
+            verify:  false

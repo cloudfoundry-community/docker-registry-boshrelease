@@ -1,0 +1,27 @@
+---
+name: smoke-tests
+packages:
+- docker
+templates:
+  bin/run: bin/run
+
+properties:
+  docker.smoke-tests.registry.ip:
+    description: IP address of hostname of the registry to test
+  docker.smoke-tests.registry.port:
+    description: Port of the registry to test
+    default: ~
+
+  docker.smoke-tests.ssl.enabled:
+    description: Connect to the registry over SSL/TLS (requires the HTTPS proxy)
+    default:     false
+  docker.smoke-tests.ssl.verify:
+    description: Verify the SSL/TLS certificate of the registry
+    default:     true
+
+  docker.smoke-tests.image:
+    description: Image to pull from Dockerhub
+    default:     alpine
+  docker.smoke-tests.retag:
+    description: Unique string to use for verifying a push
+    default:     smoke-tests-95115f

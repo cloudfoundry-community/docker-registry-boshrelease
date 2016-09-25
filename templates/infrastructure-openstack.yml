@@ -13,6 +13,10 @@ jobs:
           - gateway
       - name: elastic
         static_ips: (( grab meta.floating_ip ))
+  - name: smoke-tests
+    instances: 1
+    networks:
+      - name: (( grab networks.default.name ))
 
 compilation:
   cloud_properties:

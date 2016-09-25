@@ -18,6 +18,10 @@ jobs:
     networks:
       - name: (( grab networks.default.name ))
         static_ips: (( static_ips(0) ))
+  - name: smoke-tests
+    instances: 1
+    networks:
+      - name: (( grab networks.default.name ))
 
 disk_pools:
 - name: registry
