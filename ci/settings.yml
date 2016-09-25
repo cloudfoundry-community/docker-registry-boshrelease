@@ -1,6 +1,6 @@
 ---
 meta:
-  name:    docker-registry-boshrelease
+  name:    docker-registry
   release: Docker Registry
   target:  sw
   url:     https://ci.vsphere.starkandwayne.com
