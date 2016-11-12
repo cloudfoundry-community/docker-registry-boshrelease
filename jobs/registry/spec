@@ -65,6 +65,9 @@ properties:
   docker.registry.storage_delete:
     description: Enable the deletion of image blobs and manifests by digest
     default: false
+  docker.registry.storage_disable_redirect:
+    description: Route all data through the Registry, or redirect the client to the backend in order to download from there
+    default: false
   docker.registry.storage_maintenance:
     description: Maintenance jobs for storage, upload purging and read-only mode are the only functions available
     default:
