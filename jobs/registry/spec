@@ -79,6 +79,13 @@ properties:
       readonly:
         enabled: false
 
+  docker.registry.health_storagedriver_enabled:
+    description: Enable periodic health check on the storage driver's backend storage
+    default: true
+  docker.registry.health_cache_enabled:
+    description: In case of cache is defined, enables a periodic health check on the redis host and port
+    default: true
+
   docker.mirror.host:
     description: Enables a registry to be configured as a pull through cache to the official Docker Hub. See mirror for more information
     example: https://registry-1.docker.io
