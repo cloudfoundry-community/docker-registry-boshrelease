@@ -3,14 +3,6 @@ debian_nfs_server/nfs-kernel-server_1%3a1.2.0-4ubuntu4.1_amd64.deb:
   object_id: 04dd94b2-48dc-422d-9422-d423e439dcb1
   sha: a44b3f8319984bace61f21bb6d15cee1419e5bf3
   size: 169618
-docker/distribution-2.5.0.tar.gz:
-  object_id: 04310d75-fad1-4513-aa6e-7a0b6267d2b1
-  sha: 98e7d1ab8f2433d301240ee3d775cb8d7de45cd2
-  size: 1619051
-golang/go1.7.linux-amd64.tar.gz:
-  object_id: a71c5891-e983-41f5-a6f4-d40941f31149
-  sha: a744e29da97fc3aadad1ee0d7d89b0d899645e50
-  size: 81573766
 nginx/headers-more-nginx-module-0.30.tar.gz:
   object_id: 7f2480e6-f23f-4cb6-85ff-6343ec3259f0
   sha: a188a399f3e365a0831585a9d7aa0e6ed1a75f0d
@@ -47,3 +39,11 @@ docker/docker-1.11.0.tgz:
   object_id: 1333443e-98ee-465a-9e49-6fd12f3d2052
   sha: 242b6a3e6def6719f5002a4d3d5b35e587036c4e
   size: 20520756
+docker/distribution-2.5.1.tar.gz:
+  object_id: 28747661-5c7c-456b-bfa7-b121291cea89
+  sha: 10e99ce8a764c7a2fd5a42c4d7385409273f2959
+  size: 1604279
+golang/go1.7.3.linux-amd64.tar.gz:
+  object_id: cdf34664-4395-4e1a-9ac0-079b5512620a
+  sha: ead40e884ad4d6512bcf7b3c7420dd7fa4a96140
+  size: 82565628
