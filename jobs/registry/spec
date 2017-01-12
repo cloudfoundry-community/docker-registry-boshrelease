@@ -9,6 +9,7 @@ templates:
   bin/ctl: bin/ctl
   bin/monit_debugger: bin/monit_debugger
   config/registry.conf: config/registry.conf
+  config/gcs.key: config/gcs.key
   data/properties.sh.erb: data/properties.sh
   helpers/ctl_setup.sh: helpers/ctl_setup.sh
   helpers/ctl_utils.sh: helpers/ctl_utils.sh
@@ -17,13 +18,13 @@ templates:
 
 properties:
   docker.registry.bind:
-      description: What address to bind the Docker Registry v2 API
+    description: What address to bind the Docker Registry v2 API
   docker.registry.port:
     description: What port to run the Docker Registry v2 API on
     default: 5000
   docker.registry.loglevel:
-      description: Sets the sensitivity of logging output. Permitted values are error, warn, info and debug
-      default: info
+    description: Sets the sensitivity of logging output. Permitted values are error, warn, info and debug
+    default: info
   docker.registry.endpoint:
     description: Externally-reachable address for the registry, as a fully qualified URL. If present, it is used when creating generated URLs. Otherwise, these URLs are derived from client requests
     example: "https://myregistryaddress.org:5000"

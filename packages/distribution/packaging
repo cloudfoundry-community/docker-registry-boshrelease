@@ -29,4 +29,4 @@ export GOPATH=$BOSH_INSTALL_TARGET:${REPO_DIR}/Godeps/_workspace
 export PATH=$GOROOT/bin:$PATH
 
 echo "Installing Docker Registry ... "
-go install ${REPO_NAME}/cmd/registry
+go install -tags include_gcs  ${REPO_NAME}/cmd/registry
