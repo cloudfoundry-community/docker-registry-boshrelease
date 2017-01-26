@@ -1,8 +1,7 @@
 
 mkdir -p /var/vcap/sys/log
 
-exec > >(tee -a >(logger -p user.info -t vcap.$(basename $0).stdout) | awk -W interactive '{lineWithDate="echo [`date +\"%Y-%m-%d %H:%M:%S%z\"`] \"" $0 "\""; system(lineWithDate)  }' >>/var/vcap/sys/log/$(basename $0).log)
-exec 2> >(tee -a >(logger -p user.error -t vcap.$(basename $0).stderr) | awk -W interactive '{lineWithDate="echo [`date +\"%Y-%m-%d %H:%M:%S%z\"`] \"" $0 "\""; system(lineWithDate)  }' >>/var/vcap/sys/log/$(basename $0).err.log)
+exec >>/var/vcap/sys/log/nfs.log 2>&1
 
 pid_guard() {
   echo "------------ STARTING `basename $0` at `date` --------------" | tee /dev/stderr
