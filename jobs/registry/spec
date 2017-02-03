@@ -115,3 +115,15 @@ properties:
       newrelic:
         licensekey: newreliclicensekey
         name: newrelicname
+
+  docker.registry.notifications:
+    description: Notifications are sent in response to manifest pushes and pulls and layer pushes and pulls
+    example:
+        endpoints:
+          - name: alistener
+            url: https://mylistener.example.com/event
+            headers:
+              Authorization: [Bearer token]
+            timeout: 500ms
+            threshold: 5
+            backoff: 1s
