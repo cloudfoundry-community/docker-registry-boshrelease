@@ -2,4 +2,15 @@ check process registry
   with pidfile /var/vcap/sys/run/registry/registry.pid
   start program "/var/vcap/jobs/registry/bin/monit_debugger registry '/var/vcap/jobs/registry/bin/ctl start'"
   stop program "/var/vcap/jobs/registry/bin/monit_debugger registry '/var/vcap/jobs/registry/bin/ctl stop'"
+  if 7 restarts within 10 cycles then unmonitor
+<% if p('docker.registry.debug_endpoint_monit') == true || p('docker.registry.debug_endpoint_monit') =~ (/(true|t|yes|y|1)$/i)
+  debug = p('docker.registry.debug_endpoint')
+  port = debug.split(':')[1].to_s
+  host = (debug.split(':')[0].to_s.empty?) ? '127.0.0.1' : debug.split(':')[0].to_s
+  %>
+  if failed host <%= host %> port <%= port %>
+    send "GET /debug/health HTTP/1.1\r\nUser-Agent: monit-health-check\r\nHost: <%= host %>:<%= port %>\r\nConnection: close\r\n\r\n\"
+    expect "HTTP/[0-9\.]{3} 200 OK\r\n"
+    for 1 cycles then restart
+<% end %>
   group vcap

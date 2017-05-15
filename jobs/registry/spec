@@ -28,9 +28,15 @@ properties:
   docker.registry.endpoint:
     description: Externally-reachable address for the registry, as a fully qualified URL. If present, it is used when creating generated URLs. Otherwise, these URLs are derived from client requests
     example: "https://myregistryaddress.org:5000"
-  docker.registry.debug:
+  docker.registry.debug_endpoint:
     description: Debug endpoint can be used for monitoring registry metrics and health, as well as profiling
-    example: "localhost:5001"
+    default: "127.0.0.1:5001"
+  docker.registry.debug_endpoint_enabled:
+    description: Debug endpoint enabled or disabled. It will create a log file with the dump of the health endpoint everytime the app it is stopped, useful with monit.
+    default: true
+  docker.registry.debug_endpoint_monit:
+    description: Enable monit restart capability using the debug endpoint. Setting to true will enable the debug endpoint.
+    default: true
   docker.registry.ofiles:
     description: Open files (ulimit)
     default: 10000

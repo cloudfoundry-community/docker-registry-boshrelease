@@ -23,6 +23,22 @@ case $1 in
     echo $! > $PIDFILE
     ;;
   stop)
+<% if p('docker.registry.debug_endpoint_enabled') == true ||
+      p('docker.registry.debug_endpoint_enabled') =~ (/(true|t|yes|y|1)$/i)
+  debug = p('docker.registry.debug_endpoint')
+  port = debug.split(':')[1].to_s
+  host = (debug.split(':')[0].to_s.empty?) ? '127.0.0.1' : debug.split(':')[0].to_s
+  %>
+    (
+        echo "$(date +%y:%m:%d-%H:%M:%S) GET http://<%= host %>/<%= port %>/debug/health" >> $LOG_DIR/$JOB_NAME.health.log
+        exec 9<> /dev/tcp/<%= host %>/<%= port %>
+        echo -e "GET /debug/health HTTP/1.0\r\n\r\n" >&9
+        cat <&9 | tee -a $LOG_DIR/$JOB_NAME.health.log
+        echo >> $LOG_DIR/$JOB_NAME.health.log
+        echo "$(date +%y:%m:%d-%H:%M:%S) DONE" >> $LOG_DIR/$JOB_NAME.health.log
+        exec 9>&-
+    )
+<% end %>
     kill_and_wait $PIDFILE
     ;;
   *)
