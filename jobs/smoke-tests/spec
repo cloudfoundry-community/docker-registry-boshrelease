@@ -12,6 +12,11 @@ properties:
     description: Port of the registry to test
     default: ~
 
+  docker.smoke-tests.registry.username:
+    description: Username to use for authenticating (HTTP Basic Auth) to the registry
+  docker.smoke-tests.registry.password:
+    description: Password to use for authenticating (HTTP Basic Auth) to the registry
+
   docker.smoke-tests.ssl.enabled:
     description: Connect to the registry over SSL/TLS (requires the HTTPS proxy)
     default:     false

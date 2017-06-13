@@ -28,6 +28,8 @@ export PATH=$PATH:/var/vcap/packages/docker/sbin
 CURL=curl
 DOCKER_OPTS=
 CHECKSSL=<%= ssl %>
+USERNAME=<%= p('docker.smoke-tests.registry.username') %>
+PASSWORD=<%= p('docker.smoke-tests.registry.password') %>
 REGISTRY=<%= p('docker.smoke-tests.registry.ip') %>
 REGISTRY_URL=<%= scheme %>://${REGISTRY}:<%= port %>
 UPSTREAM=<%= p('docker.smoke-tests.image') %>
@@ -92,6 +94,15 @@ done
 echo
 echo
 echo ">> Beginning tests in earnest"
+if [[ -n "${USERNAME}" ]]; then
+  echo "   - Logging into ${REGISTRY} as ${USERNAME}"
+  docker login -u="${USERNAME}" -p="${PASSWORD}" "${REGISTRY}" 2>&1 | sed -e 's/^/       /' || \
+    bail "failed to login to ${REGISTRY} as ${USERNAME} (check manifest for password)"
+else
+  echo "   - Skipping login (no docker.smoke-tests.registry.username / password given)"
+fi
+
+echo
 echo "   - Pull ${UPSTREAM} image from Dockerhub"
 docker pull ${UPSTREAM} 2>&1 | sed -e 's/^/       /' || \
   bail "failed to pull ${UPSTREAM} from Dockerhub!"
