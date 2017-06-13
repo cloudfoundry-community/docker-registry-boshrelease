@@ -12,4 +12,6 @@ builds:
     version: 3.2.0
   80b9fe99-35d0-4361-88c8-7e46d455b3fd:
     version: 3.2.1
+  4853f881-3e7e-4cc8-a8c1-e94f9f5d8b75:
+    version: 3.2.2
 format-version: '2'
