@@ -18,6 +18,8 @@ meta:
   url:      (( param "Please specify the full url of the target Concourse CI" ))
   pipeline: (( concat meta.name "-boshrelease" ))
 
+  image:    starkandwayne/concourse
+
   aws:
     bucket:     (( concat meta.pipeline "-pipeline" ))
     access_key: (( param "Please set your AWS Access Key ID for your pipeline S3 Bucket" ))
@@ -67,7 +69,10 @@ jobs:
       - task: testflight
         config:
           platform: linux
-          image: docker:///starkandwayne/concourse
+          image_resource:
+            type: docker-image
+            source:
+              repository: (( grab meta.image ))
           inputs:
             - { name: git }
           run:
@@ -145,8 +150,11 @@ jobs:
       - name: release
         task: release
         config:
-          image: docker:///starkandwayne/concourse
           platform: linux
+          image_resource:
+            type: docker-image
+            source:
+              repository: (( grab meta.image ))
           inputs:
             - name: version
             - name: git
