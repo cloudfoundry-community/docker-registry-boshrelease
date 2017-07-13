@@ -19,6 +19,7 @@ templates:
 properties:
   docker.registry.bind:
     description: What address to bind the Docker Registry v2 API
+    default: 127.0.0.1
   docker.registry.port:
     description: What port to run the Docker Registry v2 API on
     default: 5000
