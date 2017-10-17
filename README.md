@@ -133,7 +133,7 @@ so we have to include the CA certificate there (On Ubuntu):
 
 ```
 # Copy CA cert to system certificates folder
-sudo cp cp ssl/registry.crt /usr/share/ca-certificates/
+sudo cp ssl/registry.cert /usr/share/ca-certificates/
 # Enable the new CA
 sudo update-ca-certificates
 # Restart Docker
