@@ -134,3 +134,15 @@ properties:
             timeout: 500ms
             threshold: 5
             backoff: 1s
+
+  docker.registry.http_proxy:
+    description: HTTP proxy to access other resources, like the upstream docker registry.
+    example: http://proxy.company.com:8888
+
+  docker.registry.https_proxy:
+    description: HTTPS proxy to access other resources, like the upstream docker registry.
+    example: https://proxy.company.com:8443
+
+  docker.registry.no_proxy:
+    description: Comma separated list of ips, hosts to exclude from the HTTP proxy connections
+    example: localhost,.local,.internal.mycompany.com,192.168.0.1,192.168.0.2

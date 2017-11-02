@@ -11,6 +11,15 @@ export LANG=en_US.UTF-8
 case $1 in
   start)
     pid_guard $PIDFILE $JOB_NAME
+    <%- if_p('docker.registry.http_proxy') do |v| %>
+      export http_proxy="<%= v %>"
+    <%- end %>
+    <%- if_p('docker.registry.https_proxy') do |v| %>
+      export https_proxy="<%= v %>"
+    <%- end %>
+    <%- if_p('docker.registry.no_proxy') do |v| %>
+      export no_proxy="<%= v %>"
+    <%- end %>
     (
         {
             # Set limitations on system resources
