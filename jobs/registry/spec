@@ -146,3 +146,7 @@ properties:
   docker.registry.no_proxy:
     description: Comma separated list of ips, hosts to exclude from the HTTP proxy connections
     example: localhost,.local,.internal.mycompany.com,192.168.0.1,192.168.0.2
+
+  docker.registry.relativeurls:
+    description: Configure the registry to return relative URLs inm the Location headers, without the full hostname / IP.  This is not compatible with Docker 1.7 and prior.
+    default: false
