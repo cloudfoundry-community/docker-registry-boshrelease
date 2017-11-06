@@ -16,4 +16,6 @@ builds:
     version: 3.2.2
   ce38748d-f694-436d-b0ab-e50b9b7959ce:
     version: 3.2.3
+  31a2e79b-856e-4f5b-94fa-ccd01f5a4771:
+    version: 3.3.0
 format-version: '2'
