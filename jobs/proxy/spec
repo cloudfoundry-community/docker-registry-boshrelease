@@ -55,3 +55,6 @@ properties:
     example:
       user: "{PLAIN}password"
       user2: "$(openssl passwd -crypt PASSWORD)"
+  docker.proxy.only_auth_for_admin:
+    description: If true, only administrative actions require authentication
+    default: false
