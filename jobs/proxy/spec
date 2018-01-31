@@ -16,6 +16,7 @@ templates:
   helpers/ctl_utils.sh: helpers/ctl_utils.sh
   tls/cert.pem: tls/cert.pem
   tls/key.pem: tls/key.pem
+  tls/dhparam.pem: tls/dhparam.pem
 
 properties:
   docker.proxy.loglevel:
@@ -58,3 +59,8 @@ properties:
   docker.proxy.only_auth_for_admin:
     description: If true, only administrative actions require authentication
     default: false
+  docker.proxy.ssl.protocols:
+    description: "TLS Protocols to enable in the Docker proxy (space separated)"
+    default: "TLSv1.1 TLSv1.2"
+  docker.proxy.ssl.dhparam:
+    description: "Custom DH param for nginx to use"
