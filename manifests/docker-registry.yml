@@ -1,30 +1,39 @@
 ---
+name: docker-registry
 releases:
   - name: docker-registry
     version: latest
 
-update:
-  canaries: 1
-  max_in_flight: 50
-  canary_watch_time: 1000-30000
-  update_watch_time: 1000-30000
-  serial: false
+stemcells:
+  - alias:   default
+    os:      ubuntu-trusty
+    version: latest
 
-jobs:
-  - name: registry
-    templates:
-      - { release: docker-registry, name: registry }
-      - { release: docker-registry, name: proxy }
+instance_groups:
+  - name: docker-registry
     instances: 1
-    persistent_disk_pool: registry
-    resource_pool: small_z1
+    vm_type: default
+    persistent_disk: 10_240
+    stemcell: default
+    azs: [z1]
+    networks:
+      - name: default
+    jobs:
+      - name: registry
+        release: docker-registry
+      - name: proxy
+        release: docker-registry
+      - name: cache
+        release: docker-registry
     properties:
       docker:
-        registry:
-          storage_delete: true
+        cache:
+          host: 127.0.0.1
+          redis:
+            maxmemory: "2g"
         proxy:
-          backend:
-            hosts: [127.0.0.1]
+          auth_basic:
+            docker: "{PLAIN}sekrit"
           ssl:
             # don't worry, this is a silly self-signed certificate, for testing
             cert: |+
@@ -81,17 +90,9 @@ jobs:
               JObPWXF5f5F8UTGjZJT6fnduEg==
               -----END PRIVATE KEY-----
 
-  - name: smoke-tests
-    instances: 1
-    lifecycle: errand
-    templates:
-      - { release: docker-registry, name: smoke-tests }
-    resource_pool: small_z1
-    properties:
-      docker:
-        smoke-tests:
-          registry:
-            ip: (( grab jobs.registry.networks[0].static_ips[0] ))
-          ssl:
-            enabled: true
-            verify:  false
+update:
+  canaries: 1
+  max_in_flight: 50
+  serial: false
+  canary_watch_time: 1000-60000
+  update_watch_time: 1000-60000
