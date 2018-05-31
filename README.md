@@ -77,7 +77,7 @@ bosh -n deploy
 SSL settings for Docker
 -----------------------
 
-Getting docker working with a private registry can be a time consumming
+Getting docker working with a private registry can be a time-consuming
 task. Those are the steps to make it easy (but also insecure):
 
 ```
