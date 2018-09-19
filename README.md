@@ -74,11 +74,62 @@ templates/make_manifest openstack-nova my-networking.yml
 bosh -n deploy
 ```
 
+Basic authentication
+-----------------------
+
+You have to create the new password just like for `.htpasswd` file:
+```
+htpasswd -nb docker my-very-unique-password
+```
+
+Update the `manifests/docker-registry.yml` with the new password hash:
+
+```
+instance_groups:
+  - name: docker-registry
+    properties:
+      docker:
+        proxy:
+          auth_basic:
+            docker: "$apr1$EyknLHps$aOq105nTuANVeSOfl/Pla1"
+```
+
 SSL settings for Docker
 -----------------------
 
+### Signed Certificate from a CA
+
+If you have a public domain (even if it's for internal use) you can get a free certificate from "Let’s Encrypt":
+- automated way: https://letsencrypt.org/
+- manual way: https://www.sslforfree.com/
+
+Update the `manifests/docker-registry.yml` with the SSL certificate:
+
+```
+instance_groups:
+  - name: docker-registry
+    properties:
+      docker:
+        proxy:
+          ssl:
+            cert: |+
+              -----BEGIN CERTIFICATE-----
+              ... certificate.crt ...
+              -----END CERTIFICATE-----
+              -----BEGIN CERTIFICATE-----
+              ... ca_bundle.crt ...
+              -----END CERTIFICATE-----
+            key: |+
+              -----BEGIN PRIVATE KEY-----
+              ... private.key ...
+              -----END PRIVATE KEY-----
+```
+
+
+### Self-signed Certificate 
+
 Getting docker working with a private registry can be a time-consuming
-task. Those are the steps to make it easy (but also insecure):
+task when you use a self-signed certificate. Those are the steps to make it easy (but also insecure):
 
 ```
 # Define the IP of the Docker registry server. You could use a DNS name
