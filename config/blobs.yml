@@ -1,49 +1,48 @@
----
 debian_nfs_server/nfs-kernel-server_1%3a1.2.0-4ubuntu4.1_amd64.deb:
+  size: 169618
   object_id: 04dd94b2-48dc-422d-9422-d423e439dcb1
   sha: a44b3f8319984bace61f21bb6d15cee1419e5bf3
-  size: 169618
-nginx/headers-more-nginx-module-0.30.tar.gz:
-  object_id: 7f2480e6-f23f-4cb6-85ff-6343ec3259f0
-  sha: a188a399f3e365a0831585a9d7aa0e6ed1a75f0d
-  size: 27793
-nginx/nginx-1.10.1.tar.gz:
-  object_id: ae66cab4-368b-4427-bb12-ee1e5e7a90f3
-  sha: 9c5d4e06d309bbe2efa41f09dd53912e3c3d3a75
-  size: 909077
-nginx/openssl-1.0.2h.tar.gz:
-  object_id: ed8de978-80d8-4946-adda-5db9cee8cf47
-  sha: 577585f5f5d299c44dd3c993d3c0ac7a219e4949
-  size: 5274412
-nginx/pcre-8.39.tar.gz:
-  object_id: 3c994942-80e4-4d62-ace3-62635d94fde7
-  sha: b3aec1f643d9701841e2f9d57ac121a7ff448fc8
-  size: 2062258
-nginx/zlib-1.2.8.tar.gz:
-  object_id: 51d5b062-3987-42b6-a92d-d53a192b60be
-  sha: a4d316c404ff54ca545ea71a27af7dbc29817088
-  size: 571091
-redis/redis-3.2.3.tar.gz:
-  object_id: 05dac19f-f35f-46ae-8ead-46de06d00e7c
-  sha: 92d6d93ef2efc91e595c8bf578bf72baff397507
-  size: 1541401
 docker/autoconf-2.69.tar.gz:
+  size: 1927468
   object_id: fefa1678-f589-49eb-8c68-ed53a27fd62f
   sha: 562471cbcb0dd0fa42a76665acf0dbb68479b78a
-  size: 1927468
 docker/bridge-utils-1.5.tar.gz:
+  size: 33472
   object_id: 5a7d66ba-58e3-4297-8746-39f2e1061cfc
   sha: 1f71b6f22f5d2b6d21e146f4ac20820ad42e58ee
-  size: 33472
+docker/distribution-2.6.2.tar.gz:
+  size: 1579760
+  object_id: bc507a32-5015-4706-5b38-3ba44817f071
+  sha: 334b783ffcc2b931597462e4a8177d97a98aa887
 docker/docker-1.11.0.tgz:
+  size: 20520756
   object_id: 1333443e-98ee-465a-9e49-6fd12f3d2052
   sha: 242b6a3e6def6719f5002a4d3d5b35e587036c4e
-  size: 20520756
-docker/distribution-2.5.1.tar.gz:
-  object_id: 28747661-5c7c-456b-bfa7-b121291cea89
-  sha: 10e99ce8a764c7a2fd5a42c4d7385409273f2959
-  size: 1604279
 golang/go1.7.3.linux-amd64.tar.gz:
+  size: 82565628
   object_id: cdf34664-4395-4e1a-9ac0-079b5512620a
   sha: ead40e884ad4d6512bcf7b3c7420dd7fa4a96140
-  size: 82565628
+nginx/headers-more-nginx-module-0.30.tar.gz:
+  size: 27793
+  object_id: 7f2480e6-f23f-4cb6-85ff-6343ec3259f0
+  sha: a188a399f3e365a0831585a9d7aa0e6ed1a75f0d
+nginx/nginx-1.10.1.tar.gz:
+  size: 909077
+  object_id: ae66cab4-368b-4427-bb12-ee1e5e7a90f3
+  sha: 9c5d4e06d309bbe2efa41f09dd53912e3c3d3a75
+nginx/openssl-1.0.2h.tar.gz:
+  size: 5274412
+  object_id: ed8de978-80d8-4946-adda-5db9cee8cf47
+  sha: 577585f5f5d299c44dd3c993d3c0ac7a219e4949
+nginx/pcre-8.39.tar.gz:
+  size: 2062258
+  object_id: 3c994942-80e4-4d62-ace3-62635d94fde7
+  sha: b3aec1f643d9701841e2f9d57ac121a7ff448fc8
+nginx/zlib-1.2.8.tar.gz:
+  size: 571091
+  object_id: 51d5b062-3987-42b6-a92d-d53a192b60be
+  sha: a4d316c404ff54ca545ea71a27af7dbc29817088
+redis/redis-3.2.3.tar.gz:
+  size: 1541401
+  object_id: 05dac19f-f35f-46ae-8ead-46de06d00e7c
+  sha: 92d6d93ef2efc91e595c8bf578bf72baff397507

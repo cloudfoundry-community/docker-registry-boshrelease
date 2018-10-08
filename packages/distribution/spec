@@ -3,4 +3,4 @@ name: distribution
 dependencies:
 - golang
 files:
-- docker/distribution-2.5.1.tar.gz
+- docker/distribution-2.6.2.tar.gz
