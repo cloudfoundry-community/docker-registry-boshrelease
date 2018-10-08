@@ -15,7 +15,7 @@ export HOME=/var/vcap
 #       github page: https://github.com/docker/distribution/releases
 #
 
-VERSION=2.5.1
+VERSION=2.6.2
 REPO_NAME=github.com/docker/distribution
 REPO_DIR=${BOSH_INSTALL_TARGET}/src/${REPO_NAME}
 
