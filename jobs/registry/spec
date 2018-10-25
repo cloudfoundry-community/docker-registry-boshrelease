@@ -104,6 +104,9 @@ properties:
 
   docker.cache.host:
     description: IP address of the redis cache host
+  docker.cache.disabled:
+    description: Set to true to disable blobdescriptor cache.  This can be useful in pullthrough cache deployments where a container may be cached as not existing if it hasnt finished uploading to the upstream registry.
+    default: false
   docker.cache.port:
     description: Port address of the cache host
     default: 6379
