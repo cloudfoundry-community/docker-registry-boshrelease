@@ -44,7 +44,9 @@ properties:
     description: IP address where to listen for incoming connections. (For all interfaces, do not use 0.0.0.0, use *)
     default: "*"
   docker.proxy.port:
-    description: Port to listen to for incoming connections. Defaults to 443 if ssl, otherwise 80
+    description: Port to listen to for all incoming connections. Defaults to 443 if ssl, otherwise 80
+  docker.proxy.readonly_port:
+    description: Port to listen to for only GET incoming connections. Defaults to 444 if ssl, otherwise 81
   docker.proxy.ssl.cert:
     description: PEM-encoded SSL certificate for HTTPS proxy operation
     default: ~

@@ -34,6 +34,7 @@ instance_groups:
         proxy:
           auth_basic:
             docker: "{PLAIN}sekrit"
+          only_auth_for_admin: false
           ssl:
             # don't worry, this is a silly self-signed certificate, for testing
             cert: |+

@@ -74,8 +74,18 @@ templates/make_manifest openstack-nova my-networking.yml
 bosh -n deploy
 ```
 
-Basic authentication
+Access restrictions
 -----------------------
+
+The registry can be available for administrative and reading purposes on different rules:
+- for **administrative and reading** purposes:
+  - default port: 443 (`docker.proxy.port`)
+  - default authentication: basic
+- you can enable **readonly access** without authentication by setting `docker.proxy.only_auth_for_admin=false`:
+  - default port: 444 (`docker.proxy.readonly_port`)
+  - default authentication: none
+
+#### Basic authentication
 
 You have to create the new password just like for `.htpasswd` file:
 ```
@@ -93,6 +103,7 @@ instance_groups:
           auth_basic:
             docker: "$apr1$EyknLHps$aOq105nTuANVeSOfl/Pla1"
 ```
+
 
 SSL settings for Docker
 -----------------------
