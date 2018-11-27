@@ -18,6 +18,12 @@ meta:
   url:      (( param "Please specify the full url of the target Concourse CI" ))
   pipeline: (( concat meta.name "-boshrelease" ))
 
+  manifest:
+    path:   (( concat "manifests/" meta.name ".yml" ))
+    vars:   "--- {}"
+    vars-pr: (( grab meta.manifest.vars ))
+    operator_file_paths: "" # comma separated list relative to repo root
+
   image:    starkandwayne/concourse
 
   aws:
@@ -32,12 +38,6 @@ meta:
     branch:       master
     private_key:  (( param "Please generate an SSH Deployment Key for this repo and specify it here" ))
     access_token: (( param "Please generate a Personal Access Token to be used for creating github releases (do you have a ci-bot?)" ))
-
-  bosh-lite:
-    target:     (( param "Please specify the BOSH target URI for the bosh-lite to run test deployments against" ))
-    deployment: (( param "Please specify the name of the local bosh-lite (warden) deployment" ))
-    username:   admin
-    password:   admin
 
   slack:
     webhook:       (( param "Please specify your Slack Incoming Webhook Integration URL" ))
@@ -80,10 +80,16 @@ jobs:
             args: []
           params:
             REPO_ROOT:            git
-            BOSH_LITE_TARGET:     (( grab meta.bosh-lite.target ))
-            BOSH_LITE_USERNAME:   (( grab meta.bosh-lite.username ))
-            BOSH_LITE_PASSWORD:   (( grab meta.bosh-lite.password ))
-            BOSH_LITE_DEPLOYMENT: (( grab meta.bosh-lite.deployment ))
+            BOSH_ENVIRONMENT:     (( grab meta.bosh.target ))
+            BOSH_CLIENT:          (( grab meta.bosh.username ))
+            BOSH_CLIENT_SECRET:   (( grab meta.bosh.password ))
+            BOSH_DEPLOYMENT:      (( grab meta.bosh.deployment ))
+            BOSH_CA_CERT:         (( grab meta.bosh.ca-cert ))
+            AWS_SECRET_KEY:       (( grab meta.aws.secret_key ))
+            AWS_ACCESS_KEY:       (( grab meta.aws.access_key ))
+            MANIFEST_PATH:        (( grab meta.manifest.path ))
+            MANIFEST_VARS:        (( grab meta.manifest.vars ))
+            MANIFEST_OP_PATHS:    (( grab meta.manifest.operator_file_paths ))
             TEST_ERRAND:          (( grab meta.test-errand || ~ ))
       on_failure:
         put: notify
@@ -172,10 +178,10 @@ jobs:
             REPO_OUT:     pushme
             BRANCH:       (( grab meta.github.branch ))
 
-            BOSH_LITE_TARGET:     (( grab meta.bosh-lite.target ))
-            BOSH_LITE_USERNAME:   (( grab meta.bosh-lite.username ))
-            BOSH_LITE_PASSWORD:   (( grab meta.bosh-lite.password ))
-            BOSH_LITE_DEPLOYMENT: (( grab meta.bosh-lite.deployment ))
+            BOSH_LITE_TARGET:     (( grab meta.bosh.target ))
+            BOSH_LITE_USERNAME:   (( grab meta.bosh.username ))
+            BOSH_LITE_PASSWORD:   (( grab meta.bosh.password ))
+            BOSH_LITE_DEPLOYMENT: (( grab meta.bosh.deployment ))
 
             AWS_ACCESS_KEY:       (( grab meta.aws.access_key ))
             AWS_SECRET_KEY:       (( grab meta.aws.secret_key ))
