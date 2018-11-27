@@ -25,6 +25,10 @@ meta:
     private_key:  ((github.private-key))
     access_token: ((github.access-token))
 
+  git:
+    email: ci@starkandwayne.com
+    name:  Stark & Wayne CI Bot
+
   slack:
     webhook: ((slack.webhook))
     channel: '#botspam'

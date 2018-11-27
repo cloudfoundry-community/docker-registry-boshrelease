@@ -1,8 +1,5 @@
 ---
 name: docker-registry
-releases:
-  - name: docker-registry
-    version: latest
 
 stemcells:
   - alias:   default
@@ -97,3 +94,10 @@ update:
   serial: false
   canary_watch_time: 1000-60000
   update_watch_time: 1000-60000
+
+
+releases:
+- name: safe
+  version: 0.1.2
+  url: https://github.com/cloudfoundry-community/safe-boshrelease/releases/download/v0.1.2/safe-0.1.2.tgz
+  sha1: 4b9083cb900b9f95d86d3c738c9c1595538c232d

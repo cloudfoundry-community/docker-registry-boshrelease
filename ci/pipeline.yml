@@ -176,15 +176,12 @@ jobs:
             RELEASE_NAME: (( concat meta.release " BOSH Release" ))
             RELEASE_ROOT: gh
             REPO_OUT:     pushme
-            BRANCH:       (( grab meta.github.branch ))
-
-            BOSH_LITE_TARGET:     (( grab meta.bosh.target ))
-            BOSH_LITE_USERNAME:   (( grab meta.bosh.username ))
-            BOSH_LITE_PASSWORD:   (( grab meta.bosh.password ))
-            BOSH_LITE_DEPLOYMENT: (( grab meta.bosh.deployment ))
-
-            AWS_ACCESS_KEY:       (( grab meta.aws.access_key ))
-            AWS_SECRET_KEY:       (( grab meta.aws.secret_key ))
+            GITHUB_OWNER:    (( grab meta.github.owner ))
+            BRANCH:          (( grab meta.github.branch ))
+            AWS_SECRET_KEY:  (( grab meta.aws.secret_key ))
+            AWS_ACCESS_KEY:  (( grab meta.aws.access_key ))
+            GIT_EMAIL:       (( grab meta.git.email ))
+            GIT_NAME:        (( grab meta.git.name ))
 
       - name: upload-git
         put: git
