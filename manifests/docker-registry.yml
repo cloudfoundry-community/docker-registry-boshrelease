@@ -94,10 +94,7 @@ update:
   serial: false
   canary_watch_time: 1000-60000
   update_watch_time: 1000-60000
-
-
-
-
-releases:
 - name: docker-registry
-  version: latest
+  version: 3.3.3
+  url: https://github.com/cloudfoundry-community/docker-registry-boshrelease/releases/download/v3.3.3/docker-registry-3.3.3.tgz
+  sha1: 1366cf8a107ee3f5decb32f8e83a1702852a528a
