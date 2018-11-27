@@ -167,6 +167,7 @@ jobs:
           outputs:
             - name: gh
             - name: pushme
+            - name: notifications
           run:
             path: ./git/ci/scripts/shipit
             args: []
