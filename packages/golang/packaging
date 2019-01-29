@@ -15,7 +15,7 @@ export HOME=/var/vcap
 #       download page: https://golang.org/dl
 #
 echo "Extracting go ... "
-tar xzf golang/go1.7.3.linux-amd64.tar.gz
+tar xzf golang/go1.11.linux-amd64.tar.gz
 
 echo "Installing go ..."
 cp -R go/* ${BOSH_INSTALL_TARGET}

@@ -10,18 +10,18 @@ docker/bridge-utils-1.5.tar.gz:
   size: 33472
   object_id: 5a7d66ba-58e3-4297-8746-39f2e1061cfc
   sha: 1f71b6f22f5d2b6d21e146f4ac20820ad42e58ee
-docker/distribution-2.6.2.tar.gz:
-  size: 1579760
-  object_id: bc507a32-5015-4706-5b38-3ba44817f071
-  sha: 334b783ffcc2b931597462e4a8177d97a98aa887
+docker/distribution-2.7.0.tar.gz:
+  size: 1996485
+  object_id: caa418c9-8491-4672-7c3d-b9acab89c092
+  sha: 43cb56b3c94492d3f73ec83b607caed10821aadb
 docker/docker-1.11.0.tgz:
   size: 20520756
   object_id: 1333443e-98ee-465a-9e49-6fd12f3d2052
   sha: 242b6a3e6def6719f5002a4d3d5b35e587036c4e
-golang/go1.7.3.linux-amd64.tar.gz:
-  size: 82565628
-  object_id: cdf34664-4395-4e1a-9ac0-079b5512620a
-  sha: ead40e884ad4d6512bcf7b3c7420dd7fa4a96140
+golang/go1.11.linux-amd64.tar.gz:
+  size: 127163815
+  object_id: 68685d76-847e-4414-68c4-3fcd60d35185
+  sha: 8ffb718cab4371df3495d8f6c0b15c7e6dc28fea
 nginx/headers-more-nginx-module-0.30.tar.gz:
   size: 27793
   object_id: 7f2480e6-f23f-4cb6-85ff-6343ec3259f0
