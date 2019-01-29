@@ -97,6 +97,6 @@ update:
 
 releases:
 - name: docker-registry
-  version: 3.3.3
-  url: https://github.com/cloudfoundry-community/docker-registry-boshrelease/releases/download/v3.3.3/docker-registry-3.3.3.tgz
-  sha1: 1366cf8a107ee3f5decb32f8e83a1702852a528a
+  version: 3.4.0
+  url: https://github.com/cloudfoundry-community/docker-registry-boshrelease/releases/download/v3.4.0/docker-registry-3.4.0.tgz
+  sha1: e769d4a9ebd410a327088f75d9e3e482b4788801

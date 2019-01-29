@@ -1,0 +1,70 @@
+name: docker-registry
+version: 3.4.0
+commit_hash: b10947c
+uncommitted_changes: false
+jobs:
+- name: cache
+  version: 26f031329409f4db87cbb0805830344c7cd474e4
+  fingerprint: 26f031329409f4db87cbb0805830344c7cd474e4
+  sha1: dc43bff9c6afde0566b85286b013b87302c6b600
+- name: debian_nfs_server
+  version: 6ae9773e16312531826126462b8dbe87294c20f4
+  fingerprint: 6ae9773e16312531826126462b8dbe87294c20f4
+  sha1: 0d20bdf4c7450ec78b21911d70a5ead6cb55a9bd
+- name: nfs_mounter
+  version: ddd6b0a39eaeb9b28a15dfbe9f03dd5b500d4311
+  fingerprint: ddd6b0a39eaeb9b28a15dfbe9f03dd5b500d4311
+  sha1: ebac03d44e18e4c1b58ea1cb84994fc588e0717b
+- name: proxy
+  version: 87f0bed21b2e5693d576aa8fd5488c1cf03d0eff
+  fingerprint: 87f0bed21b2e5693d576aa8fd5488c1cf03d0eff
+  sha1: bc4ec4b0c1d0e178b920bc0733e7c057ba6f0349
+- name: registry
+  version: 31a17b2ed47bc3123bbc7cc96de4ef454901268c
+  fingerprint: 31a17b2ed47bc3123bbc7cc96de4ef454901268c
+  sha1: 350798b82852b139bea8c738e208e03b0ddf4402
+- name: smoke-tests
+  version: bef45e1a9fc835bd4617070cc4ab94aea09ad259
+  fingerprint: bef45e1a9fc835bd4617070cc4ab94aea09ad259
+  sha1: 45697881db427ea1bdf9329b8ec1b0c84395e5ef
+packages:
+- name: common
+  version: 899d3f33508dd4b299cbc19c8572fd0a177760f2
+  fingerprint: 899d3f33508dd4b299cbc19c8572fd0a177760f2
+  sha1: 1828cf77df5fdd8f3eb580c050bad10a1263e420
+  dependencies: []
+- name: debian_nfs_server
+  version: 36c3887802083d9dc35a6da93238b80ac8c2dacd
+  fingerprint: 36c3887802083d9dc35a6da93238b80ac8c2dacd
+  sha1: 19fff41d2d68bfaef1039cb361b8e8725706783f
+  dependencies: []
+- name: distribution
+  version: 07ebdfec114748eef3a8f2529e4244fd46ed9bc9
+  fingerprint: 07ebdfec114748eef3a8f2529e4244fd46ed9bc9
+  sha1: 70c5e9870013121a25b6e5cf3985b32a7b2b09fc
+  dependencies:
+  - golang
+- name: docker
+  version: 51d649446312fae22b13c10e60a537d81c3b32c4
+  fingerprint: 51d649446312fae22b13c10e60a537d81c3b32c4
+  sha1: aa1d6baae3fa27ef0d439be607da303ea3e83e42
+  dependencies: []
+- name: golang
+  version: a3b87957bffa71c9c7aa854296cc7bd268b197de
+  fingerprint: a3b87957bffa71c9c7aa854296cc7bd268b197de
+  sha1: 1e52ce5f36e50374bb3b4086cf11c893b6d31625
+  dependencies: []
+- name: nginx
+  version: d416a346de08db82db9a17db625da546ab20fece
+  fingerprint: d416a346de08db82db9a17db625da546ab20fece
+  sha1: b29af9d97eabe30d749ab8c0e5001b92b830d5d1
+  dependencies: []
+- name: redis
+  version: 879fb144342f3dc937b2b51bd2052b918552986e
+  fingerprint: 879fb144342f3dc937b2b51bd2052b918552986e
+  sha1: 0278970c512846ed00c91efcb13d8c04609da80c
+  dependencies: []
+license:
+  version: 6bd23209acd3ab12a5e14d7c43e930b72f2c64a3
+  fingerprint: 6bd23209acd3ab12a5e14d7c43e930b72f2c64a3
+  sha1: b0889d9e531da60bf41398431215f39d219cae55
