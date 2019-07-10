@@ -1,0 +1,7 @@
+#!/bin/bash
+set -eu
+mkdir -p /var/vcap/sys/log/nfs
+exec >>/var/vcap/sys/log/nfs/post-stop.log 2>&1
+
+echo "[$(date)] shutting down NFS..."
+/etc/init.d/nfs-kernel-server stop
