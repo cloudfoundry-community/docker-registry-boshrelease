@@ -2,17 +2,21 @@
 meta:
   name:    docker-registry
   release: Docker Registry
-  target:  pipes-main
+  target:  pipes
   url:     https://pipes.starkandwayne.com
 
-  initial_version: 3.1.0
+  manifest:
+    path: ci/manifest.yml
 
-  bosh:
-    target: https://10.200.131.9:25555
-    deployment: docker-registry-warden
+  git:
+    name: Stark & Wayne CI Bot
+    email: ci@starkandwayne.com
+
+  bosh-lite:
+    target:   https://10.128.4.73:25555
     username: ((thunder-dome.username))
     password: ((thunder-dome.password))
-    ca-cert:  ((thunder-dome.ca-certificate))
+    cacert:   ((thunder-dome.ca-certificate))
 
   aws:
     access_key: ((cfcommunity.access))
@@ -22,13 +26,10 @@ meta:
     owner:  cloudfoundry-community
     repo:   docker-registry-boshrelease
     branch: master
-    private_key:  ((github.private-key))
-    access_token: ((github.access-token))
+    private_key:  ((starkandwayne-bot-github.private-key))
+    access_token: ((starkandwayne-bot-github.access-token))
 
-  git:
-    email: ci@starkandwayne.com
-    name:  Stark & Wayne CI Bot
-
-  slack:
-    webhook: ((slack.webhook))
-    channel: '#botspam'
+  shout:
+    url:      http://10.128.4.65:7109
+    username: ((shout.username))
+    password: ((shout.password))
