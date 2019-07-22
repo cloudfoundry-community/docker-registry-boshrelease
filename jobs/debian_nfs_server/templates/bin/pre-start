@@ -41,5 +41,18 @@ xenial)
   ;;
 esac
 
+echo "[$(date)] configuring NFS..."
+VCAP_UID=$(getent passwd vcap | cut -d : -f 3)
+VCAP_GID=$(getent passwd vcap | cut -d : -f 4)
+sed -e "s/\$VCAP_UID/$VCAP_UID/;s/\$VCAP_GID/$VCAP_GID/" \
+       /var/vcap/jobs/debian_nfs_server/config/exports \
+       > /etc/exports
+
 echo "[$(date)] starting up NFS..."
 /etc/init.d/nfs-kernel-server start
+exportfs -rav
+
+echo "[$(date)] chowning all of the NFS root..."
+chown -R vcap:vcap /var/vcap/store
+
+echo "[$(date)] DONE"
