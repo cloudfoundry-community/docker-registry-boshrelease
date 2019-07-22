@@ -1,0 +1,5 @@
+#!/bin/bash
+set -eu
+
+NFS_LOCAL=<%= p('nfs_server.share_path') %>
+umount $NFS_LOCAL || true

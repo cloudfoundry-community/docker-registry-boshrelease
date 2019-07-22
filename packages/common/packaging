@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-set -e
-set -x
-
-echo "Copying common shell libs  ... "
-cp -a common/* ${BOSH_INSTALL_TARGET}
