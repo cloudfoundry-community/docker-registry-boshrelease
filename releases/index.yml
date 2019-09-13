@@ -25,6 +25,8 @@ builds:
     version: "3"
   ce38748d-f694-436d-b0ab-e50b9b7959ce:
     version: 3.2.3
+  f52e5b7f-57f9-428d-5108-3e6167a3a2a0:
+    version: 3.5.1
   f5927597-6222-4c58-a7e1-deb7aecbfd94:
     version: "2"
 format-version: "2"
