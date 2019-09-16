@@ -42,6 +42,8 @@ esac
 NFS_LOCAL=<%= p('nfs_server.share_path') %>
 NFS_REMOTE=<%= p('nfs_server.share', '/var/vcap/store') %>
 
+mkdir -p "$NFS_LOCAL"
+
 echo "[$(date)] mounting NFS at '$NFS_REMOTE' to '$NFS_LOCAL'"
 umount $NFS_LOCAL 2>/dev/null || true
 <% if properties.nfs_server.nfsv4 %>

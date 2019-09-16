@@ -44,7 +44,7 @@ esac
 echo "[$(date)] configuring NFS..."
 VCAP_UID=$(getent passwd vcap | cut -d : -f 3)
 VCAP_GID=$(getent passwd vcap | cut -d : -f 4)
-sed -e "s/\$VCAP_UID/$VCAP_UID/;s/\$VCAP_GID/$VCAP_GID/" \
+sed -e "s/\$VCAP_UID/$VCAP_UID/g;s/\$VCAP_GID/$VCAP_GID/g" \
        /var/vcap/jobs/debian_nfs_server/config/exports \
        > /etc/exports
 
