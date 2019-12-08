@@ -15,6 +15,7 @@ instance_groups:
     azs: [z1]
     networks:
       - name: default
+        static_ips: [((ip))]
     jobs:
       - name: registry
         release: docker-registry
@@ -30,63 +31,11 @@ instance_groups:
             maxmemory: "2g"
         proxy:
           auth_basic:
-            docker: "{PLAIN}sekrit"
+            admin: "{PLAIN}((docker_registry_password))"
           only_auth_for_admin: false
           ssl:
-            # don't worry, this is a silly self-signed certificate, for testing
-            cert: |+
-              -----BEGIN CERTIFICATE-----
-              MIIDxTCCAq2gAwIBAgIJAKHr+jYSc6p5MA0GCSqGSIb3DQEBCwUAMHkxCzAJBgNV
-              BAYTAlVTMREwDwYDVQQIDAhOZXcgWW9yazEQMA4GA1UEBwwHQnVmZmFsbzEhMB8G
-              A1UECgwYSW50ZXJuZXQgV2lkZ2l0cyBQdHkgTHRkMSIwIAYDVQQDDBlkb2NrZXIu
-              MTAuMjQ0LjQuMTEueGlwLmlvMB4XDTE2MDMwNzE5MTQxNVoXDTE3MDMwNzE5MTQx
-              NVoweTELMAkGA1UEBhMCVVMxETAPBgNVBAgMCE5ldyBZb3JrMRAwDgYDVQQHDAdC
-              dWZmYWxvMSEwHwYDVQQKDBhJbnRlcm5ldCBXaWRnaXRzIFB0eSBMdGQxIjAgBgNV
-              BAMMGWRvY2tlci4xMC4yNDQuNC4xMS54aXAuaW8wggEiMA0GCSqGSIb3DQEBAQUA
-              A4IBDwAwggEKAoIBAQDFE0WaKQhHYxuNZdW6quZL/DZ3Q2TafgMBB9w3chxbGlmr
-              W9k52gaM/Ix04DV4xcKafduxaS/+zAJSpw5x7EXBn+7Pg5DGD5E3uyGP5tQbOdJE
-              tkHW+oETh5oDvgrh1ykUtsQNtvFeokwmzDBZ0qWBG4R/pSPmb1yQKr3H4yEKUmfl
-              wUU+chbeAy2s5TNWUuj5hBsfYoAqH3FWp6+NcWMDO3l9fpjZEOB3cmXClFWYm1LD
-              SUenhnm8IE2JhjO/Ikr3v+dIPS8De23nluOk4y670ncpuEZOjnLd7jhwoPFgFY0l
-              GGHHhMLIx4QKyt8lueRuzAkLeGfje91Sn5G4BVFXAgMBAAGjUDBOMB0GA1UdDgQW
-              BBQMCr9VGYmcw14C32yawH71Le2f1TAfBgNVHSMEGDAWgBQMCr9VGYmcw14C32ya
-              wH71Le2f1TAMBgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBCwUAA4IBAQAP3vcHFNEa
-              NT/sQORPDAtzKx0pJp2z+B5dln8c+m7jjZEPDyBJOlVgMOIPJqLgATEzh2UfSgfM
-              mZLnRM4e4lQHjRiZkClmq2zinQb4yjkAlAGWrr+jBE0ngLpPqq258rUZfON64j+7
-              Th3YeatwDoTkvuXYzMUUi8upkK/0K2+tAxZqitUkke85729owi4QW8sRr9DqHqqp
-              4zJ6HZe+Q45pPg+DUyWIBJ2Jty88BEOoLmwb+/dsh/Xtf6Fdh5z64qgmUtTFkiPS
-              bsbPRzB0AaTA65alWviLBOmJn9S4xOv4XUC5scqsXnjPFzFT/XxA6iDux/xBMieT
-              7y9cXpKlGsDT
-              -----END CERTIFICATE-----
-            key: |+
-              -----BEGIN PRIVATE KEY-----
-              MIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDFE0WaKQhHYxuN
-              ZdW6quZL/DZ3Q2TafgMBB9w3chxbGlmrW9k52gaM/Ix04DV4xcKafduxaS/+zAJS
-              pw5x7EXBn+7Pg5DGD5E3uyGP5tQbOdJEtkHW+oETh5oDvgrh1ykUtsQNtvFeokwm
-              zDBZ0qWBG4R/pSPmb1yQKr3H4yEKUmflwUU+chbeAy2s5TNWUuj5hBsfYoAqH3FW
-              p6+NcWMDO3l9fpjZEOB3cmXClFWYm1LDSUenhnm8IE2JhjO/Ikr3v+dIPS8De23n
-              luOk4y670ncpuEZOjnLd7jhwoPFgFY0lGGHHhMLIx4QKyt8lueRuzAkLeGfje91S
-              n5G4BVFXAgMBAAECggEBAIl74FqjtXrX0SjbmjcXcoIf+X9KLNmgf0gAy8iCevWz
-              dErvUKPjTh6dMP94StVuYUyV8OXbk/gVKqmukY04X5GsmVV7W0xRH+XZTpitV9uG
-              gwIcg+IN8G5Hc1KZCc5z49zng+5tagWzA50tZa3EHmHraIwEEP95QQHyT2NbOHmR
-              uJ4+dhnH0HdPNgqo4b0kaEj15sjLjMmfahBgHHLSOOMrgmKC9/a8su9P6ikXniR6
-              GwVUcA/oeiuwhzuQGktPHz85GlLi663IzIZzJt8yocoUNLG6XQdMLQG/zOlidFl6
-              5mG3ifgN+xPFc9vwRj/gU4ySG7s1RY7P9WXpDulfAIECgYEA+GKPYbz/4Kmi8RN9
-              JmV2rTMr2kW/6ehkpDKIqWZESmpPzS3sKswXl02QPRBTmklkb9HaA2mSYhMQ9ljP
-              UlwXBsqaAZjzkkrVoKBeRcNa6X8jsDVUXtpdQiBjt4rTE+yir8VEFwCEr2cg3tl7
-              fgIzb2Ji6Mh49NQRF/T2FV40OykCgYEAyx4CbVYvuWmMdq/mNjUjKE3QK1sq3XNt
-              jh3WeZJgaOIt+4S2hTMoRAjaoBFXZuTTiQs9Pu6TJUyiS25mZZnR01k5SNZRo2+9
-              +lh4BAs6O6thg4F/daqzP82M7g4T76kG6TgQQEw4GJFaoZntOQCMfDujFpnks/HG
-              7yvFDVYzOH8CgYEA86PSG0BGCfy7/Rdt0mUCdUBViqSSbIHtfnanQOs0n34Kyyt5
-              lj1eAqctjgheyV+mal0BKgm7cgJbyBkzPAli+OFxEZITkfNf+1BzSKEooxN4UVbu
-              bKBri/qzdY1yIQAkUKACe0Gh5WAWiSHxlZfZFi/+73H928HNBp/dZvZh64kCgYEA
-              wDLPXSKW2j3UGmLr1hOGBxdKihwkfZRB8J6vWi52aAjONhgolfYIfghax+hg6g5R
-              VHZ8J9adCkhvsizvW+insfPVzuRuL9cGz6NzPXBaVCghh8y8DV3Pa+pXFtPfbYJl
-              9b2FMzJsSmMQfaYn4S5xwQS1mCdbUCLSeXLTbYFJyoUCgYBJbRlN5/640YYgywU6
-              PDIZFZmdQp33duh/L4ym08PjaAlyfDX96vHOP8pKxRIyaqb2TVDbpm7T4oJbr79G
-              B9f/jV291iU/978Rz22zIN9Y48s2hmu/Skou0+/jFTuBZDeJrWEAd9wxFr9ZGYW2
-              JObPWXF5f5F8UTGjZJT6fnduEg==
-              -----END PRIVATE KEY-----
+            cert: ((docker_registry_certificate.certificate))
+            key: ((docker_registry_certificate.private_key))
 
 update:
   canaries: 1
@@ -94,6 +43,25 @@ update:
   serial: false
   canary_watch_time: 1000-60000
   update_watch_time: 1000-60000
+
+variables:
+  - name: docker_registry_password
+    type: password
+  - name: docker_registry_ca
+    type: certificate
+    options:
+      is_ca: true
+      common_name: docker_registry_ca
+  - name: docker_registry_certificate
+    type: certificate
+    options:
+      ca: docker_registry_ca
+      common_name: docker_registry
+      extended_key_usage:
+        - client_auth
+        - server_auth
+      alternative_names:
+      - ((ip))
 
 releases:
 - name:    docker-registry

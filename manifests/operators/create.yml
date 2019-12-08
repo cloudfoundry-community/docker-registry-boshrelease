@@ -1,0 +1,6 @@
+- type: replace
+  path: /releases/name=docker-registry
+  value:
+    name: docker-registry
+    url: .
+    version: create
