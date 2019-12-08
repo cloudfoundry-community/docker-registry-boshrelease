@@ -2,29 +2,43 @@
 
 Run your own private Docker Registry in standalone mode (without requiring the public index).
 
-For example, tagging and pushing the public `ubuntu:latest` repository to your Docker repository:
+## Simple deployment with internal DNS
+
+The default deployment manifest will create an internal DNS hostname `docker-registry.bosh` for clients to use.
 
 ```plain
-bosh -d docker-registry deploy \
-    manifests/docker-registry.yml \
-    -v ip=10.244.0.34
+bosh -d docker-registry deploy manifests/docker-registry.yml
 ```
 
 Now fetch the self-signed root CA, and the admin basic-auth password, and store in local files:
 
 ```plain
 credhub get -n /bucc/docker-registry/docker_registry_certificate -j \
-    | jq -r ".value.ca" > ca.pem
+    | jq -r ".value.ca" > registry-ca.pem
 credhub get -n /bucc/docker-registry/docker_registry_password -j \
-    | jq -r ".value" > password
+    | jq -r ".value" > registry-password
 ```
 
-We can now interact with the Registry via its API:
+We can test out our registry from within the registry's own instance. First, upload our secrets:
 
 ```plain
-$ curl https://10.244.0.34/v2/_catalog -u "admin:$(cat password)" --cacert ca.pem
+bosh scp registry-ca.pem registry-password docker-registry:/tmp/
+```
+
+Next, SSH into the instance:
+
+```plain
+bosh -d docker-registry ssh
+```
+
+We can now interact with the Registry via its API and its DNS alias `docker-registry.bosh`:
+
+```plain
+$ curl https://docker-registry.bosh/v2/_catalog -u "admin:$(cat /tmp/password)" --cacert /tmp/ca.pem
 {"repositories":[]}
 ```
+
+## Expose Docker Registry via Static IP
 
 Now add ca.pem to system CA (please let use know if there's a way for `docker login` to consume a local self-signed CA). For example, in Keychain it may look like:
 

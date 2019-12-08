@@ -15,12 +15,20 @@ instance_groups:
     azs: [z1]
     networks:
       - name: default
-        static_ips: [((ip))]
     jobs:
       - name: registry
         release: docker-registry
       - name: proxy
         release: docker-registry
+        custom_provider_definitions:
+        - name: registry
+          type: https
+          shared: true
+        provides:
+          registry:
+            aliases:
+            - domain: docker-registry.bosh
+              health_filter: "healthy"
       - name: cache
         release: docker-registry
     properties:
@@ -61,7 +69,7 @@ variables:
         - client_auth
         - server_auth
       alternative_names:
-      - ((ip))
+      - docker-registry.bosh
 
 releases:
 - name:    docker-registry
