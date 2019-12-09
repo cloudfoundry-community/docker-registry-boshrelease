@@ -1,0 +1,7 @@
+- type: replace
+  path: /instance_groups/name=docker-registry/networks/name=default/static_ips?
+  value: [((ip))]
+
+- type: replace
+  path: /variables/name=docker_registry_certificate/options/alternative_names/-
+  value: ((ip))

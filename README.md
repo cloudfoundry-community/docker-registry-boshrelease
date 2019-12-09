@@ -40,6 +40,21 @@ $ curl https://docker-registry.bosh/v2/_catalog -u "admin:$(cat /tmp/password)" 
 
 ## Expose Docker Registry via Static IP
 
+Delete the TLS certificate for the Docker Registry, so that a new one will be generated that includes both the new static IP, and the `docker-registry.bosh` hostname:
+
+```plain
+credhub delete -n /bucc/docker-registry/docker_registry_certificate
+```
+
+Select an available static IP from the Cloud Config. We'll use 10.244.0.34 below, and re-deploy the Docker Registry with the `manifests/operators/static-ip.yml` operator file:
+
+```plain
+bosh -d docker-registry deploy manifests/docker-registry.yml \
+    -o manifests/operators/static-ip.yml \
+    -v ip=10.244.0.34
+```
+
+
 Now add ca.pem to system CA (please let use know if there's a way for `docker login` to consume a local self-signed CA). For example, in Keychain it may look like:
 
 ![keychain](https://p198.p4.n0.cdn.getcloudapp.com/items/p9u5lR81/docker-registry-ca-keychain.png?v=0a5b64b4ab0ebf3538ad61d35d45557f)
